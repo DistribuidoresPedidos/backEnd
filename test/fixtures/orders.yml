@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: MyString
+  exitDate: 2017-03-26
+  arrivalDate: 2017-03-26
+  totalPrice: 1.5
+  retailer: one
+  route: one
+
+two:
+  state: MyString
+  exitDate: 2017-03-26
+  arrivalDate: 2017-03-26
+  totalPrice: 1.5
+  retailer: two
+  route: two
