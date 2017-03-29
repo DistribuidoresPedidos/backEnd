@@ -3,3 +3,5 @@ class Route < ApplicationRecord
   has_many :orders
   validates :name , :sites , presence: true
 end
+
+

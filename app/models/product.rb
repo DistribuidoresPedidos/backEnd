@@ -15,7 +15,7 @@ class Product < ApplicationRecord
         .where(offeredProducts:{
 
             distributor_id: distributor
-        }).paginate(:page => page , :per_page=> perpage )
+        }).paginate(:page => page , :per_page=> per_page )
 
     #another solution AKS!!
     '''
