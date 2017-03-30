@@ -25,6 +25,11 @@ class Product < ApplicationRecord
         .group("products.id")
         .where("products.name LIKE ?", "#{name.downcase}")
     end
+
+    def self.find_by_retailer(param, retailer, page=1 , per_page=10)
+        
+    end
+
     #another solution AKS!!
     '''
     def self.products_by_distributor(distributor, page=1 , per_page=> 10)
