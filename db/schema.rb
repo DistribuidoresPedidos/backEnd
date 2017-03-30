@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330035229) do
+ActiveRecord::Schema.define(version: 20170330201310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,9 @@ ActiveRecord::Schema.define(version: 20170330035229) do
     t.string   "email",                                    null: false
     t.string   "phoneNumber",                              null: false
     t.string   "photo",                                    null: false
-    t.json     "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.json     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["confirmation_token"], name: "index_distributors_on_confirmation_token", unique: true, using: :btree
@@ -132,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170330035229) do
     t.string   "photo"
     t.float    "latitude"
     t.float    "longitude"
+    t.json     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["confirmation_token"], name: "index_retailers_on_confirmation_token", unique: true, using: :btree

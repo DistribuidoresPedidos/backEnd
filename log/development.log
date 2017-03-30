@@ -612,3 +612,289 @@ Migrating to SetupEarthdistance (20170330035229)
   [1m[36mDistributor Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "jcru@unal.co"], ["LIMIT", 1]]
   [1m[36mDistributor Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "6545656"], ["LIMIT", 1]]
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (72.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "66295654"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "66295654"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "66295654"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "66295654"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "66295654"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1441219901760959145);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (41.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to SetupEarthdistance (20170330035229)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (44.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (14.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-30 20:02:18 UTC], ["updated_at", 2017-03-30 20:02:18 UTC]]
+  [1m[35m (13.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (577.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dealersApi_development"[0m
+  [1m[35m (255.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dealersApi_test"[0m
+  [1m[35m (126.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (133.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1441219901760959145);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateDistributors (20170326131840)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (112.0ms)[0m  [1m[35mCREATE TABLE "distributors" ("id" serial primary key, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying NOT NULL, "email" character varying NOT NULL, "phoneNumber" character varying NOT NULL, "photo" character varying NOT NULL, "latitude" float, "longitude" float, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (40.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_email" ON "distributors"  ("email")[0m
+  [1m[35m (40.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_uid_and_provider" ON "distributors"  ("uid", "provider")[0m
+  [1m[35m (41.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_reset_password_token" ON "distributors"  ("reset_password_token")[0m
+  [1m[35m (76.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_confirmation_token" ON "distributors"  ("confirmation_token")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326131840"]]
+  [1m[35m (25.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateRetailers (20170326131907)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (119.9ms)[0m  [1m[35mCREATE TABLE "retailers" ("id" serial primary key, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying NOT NULL, "description" text, "email" character varying NOT NULL, "phoneNumber" character varying NOT NULL, "photo" character varying, "latitude" float, "longitude" float, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (51.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_email" ON "retailers"  ("email")[0m
+  [1m[35m (51.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_uid_and_provider" ON "retailers"  ("uid", "provider")[0m
+  [1m[35m (40.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_reset_password_token" ON "retailers"  ("reset_password_token")[0m
+  [1m[35m (57.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_confirmation_token" ON "retailers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326131907"]]
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20170326141958)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (90.4ms)[0m  [1m[35mCREATE TABLE "products" ("id" serial primary key, "name" character varying NOT NULL, "category" character varying NOT NULL, "weight" float NOT NULL, "photo" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326141958"]]
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOfferedProducts (20170326142223)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (71.7ms)[0m  [1m[35mCREATE TABLE "offered_products" ("id" serial primary key, "price" float NOT NULL, "product_id" integer, "distributor_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c5b18c5d66"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+, CONSTRAINT "fk_rails_2dfb4922a6"
+FOREIGN KEY ("distributor_id")
+  REFERENCES "distributors" ("id")
+)[0m
+  [1m[35m (40.0ms)[0m  [1m[35mCREATE  INDEX  "index_offered_products_on_product_id" ON "offered_products"  ("product_id")[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCREATE  INDEX  "index_offered_products_on_distributor_id" ON "offered_products"  ("distributor_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142223"]]
+  [1m[35m (21.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRoutes (20170326142330)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (101.7ms)[0m  [1m[35mCREATE TABLE "routes" ("id" serial primary key, "name" character varying NOT NULL, "distributor_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_212be7ef70"
+FOREIGN KEY ("distributor_id")
+  REFERENCES "distributors" ("id")
+)[0m
+  [1m[35m (39.9ms)[0m  [1m[35mCREATE  INDEX  "index_routes_on_distributor_id" ON "routes"  ("distributor_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142330"]]
+  [1m[35m (18.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20170326142517)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (109.5ms)[0m  [1m[35mCREATE TABLE "orders" ("id" serial primary key, "state" character varying NOT NULL, "exitDate" date NOT NULL, "arrivalDate" date NOT NULL, "totalPrice" float NOT NULL, "retailer_id" integer, "route_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b278d1cf80"
+FOREIGN KEY ("retailer_id")
+  REFERENCES "retailers" ("id")
+, CONSTRAINT "fk_rails_eba449c40b"
+FOREIGN KEY ("route_id")
+  REFERENCES "routes" ("id")
+)[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_retailer_id" ON "orders"  ("retailer_id")[0m
+  [1m[35m (40.3ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_route_id" ON "orders"  ("route_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142517"]]
+  [1m[35m (15.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20170326142617)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (109.1ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "title" character varying NOT NULL, "content" text NOT NULL, "dateComment" date, "order_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_453b7b85cf"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+)[0m
+  [1m[35m (44.9ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_order_id" ON "comments"  ("order_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142617"]]
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrderProducts (20170326142804)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (49.4ms)[0m  [1m[35mCREATE TABLE "order_products" ("id" serial primary key, "quantity" float NOT NULL, "price" float NOT NULL, "offered_product_id" integer, "order_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_82342e2ff8"
+FOREIGN KEY ("offered_product_id")
+  REFERENCES "offered_products" ("id")
+, CONSTRAINT "fk_rails_f40b8ccee4"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+)[0m
+  [1m[35m (39.3ms)[0m  [1m[35mCREATE  INDEX  "index_order_products_on_offered_product_id" ON "order_products"  ("offered_product_id")[0m
+  [1m[35m (55.5ms)[0m  [1m[35mCREATE  INDEX  "index_order_products_on_order_id" ON "order_products"  ("order_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142804"]]
+  [1m[35m (8.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCalificationToComment (20170329050348)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "comments" ADD "calification" integer NOT NULL[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170329050348"]]
+  [1m[35m (27.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoordinates (20170330025545)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (56.3ms)[0m  [1m[35mCREATE TABLE "coordinates" ("id" serial primary key, "latitude" float, "longitude" float, "route_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f52ea6c840"
+FOREIGN KEY ("route_id")
+  REFERENCES "routes" ("id")
+)[0m
+  [1m[35m (52.0ms)[0m  [1m[35mCREATE  INDEX  "index_coordinates_on_route_id" ON "coordinates"  ("route_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170330025545"]]
+  [1m[35m (30.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetupEarthdistance (20170330035229)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1441219901760959145);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to SetupEarthdistance (20170330035229)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-30 20:09:09 UTC], ["updated_at", 2017-03-30 20:09:09 UTC]]
+  [1m[35m (28.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (233.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dealersApi_development"[0m
+  [1m[35m (233.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dealersApi_test"[0m
+  [1m[35m (108.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (107.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1441219901760959145);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateDistributors (20170326131840)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (75.1ms)[0m  [1m[35mCREATE TABLE "distributors" ("id" serial primary key, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying NOT NULL, "email" character varying NOT NULL, "phoneNumber" character varying NOT NULL, "photo" character varying NOT NULL, "latitude" float, "longitude" float, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (39.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_email" ON "distributors"  ("email")[0m
+  [1m[35m (58.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_uid_and_provider" ON "distributors"  ("uid", "provider")[0m
+  [1m[35m (45.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_reset_password_token" ON "distributors"  ("reset_password_token")[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_distributors_on_confirmation_token" ON "distributors"  ("confirmation_token")[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326131840"]]
+  [1m[35m (19.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateRetailers (20170326131907)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (106.0ms)[0m  [1m[35mCREATE TABLE "retailers" ("id" serial primary key, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying NOT NULL, "description" text, "email" character varying NOT NULL, "phoneNumber" character varying NOT NULL, "photo" character varying, "latitude" float, "longitude" float, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (37.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_email" ON "retailers"  ("email")[0m
+  [1m[35m (41.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_uid_and_provider" ON "retailers"  ("uid", "provider")[0m
+  [1m[35m (41.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_reset_password_token" ON "retailers"  ("reset_password_token")[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_retailers_on_confirmation_token" ON "retailers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326131907"]]
+  [1m[35m (18.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20170326141958)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (77.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" serial primary key, "name" character varying NOT NULL, "category" character varying NOT NULL, "weight" float NOT NULL, "photo" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326141958"]]
+  [1m[35m (15.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOfferedProducts (20170326142223)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (67.1ms)[0m  [1m[35mCREATE TABLE "offered_products" ("id" serial primary key, "price" float NOT NULL, "product_id" integer, "distributor_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c5b18c5d66"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+, CONSTRAINT "fk_rails_2dfb4922a6"
+FOREIGN KEY ("distributor_id")
+  REFERENCES "distributors" ("id")
+)[0m
+  [1m[35m (42.2ms)[0m  [1m[35mCREATE  INDEX  "index_offered_products_on_product_id" ON "offered_products"  ("product_id")[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE  INDEX  "index_offered_products_on_distributor_id" ON "offered_products"  ("distributor_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142223"]]
+  [1m[35m (14.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRoutes (20170326142330)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2683.5ms)[0m  [1m[35mCREATE TABLE "routes" ("id" serial primary key, "name" character varying NOT NULL, "distributor_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_212be7ef70"
+FOREIGN KEY ("distributor_id")
+  REFERENCES "distributors" ("id")
+)[0m
+  [1m[35m (44.6ms)[0m  [1m[35mCREATE  INDEX  "index_routes_on_distributor_id" ON "routes"  ("distributor_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142330"]]
+  [1m[35m (11.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20170326142517)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (100.4ms)[0m  [1m[35mCREATE TABLE "orders" ("id" serial primary key, "state" character varying NOT NULL, "exitDate" date NOT NULL, "arrivalDate" date NOT NULL, "totalPrice" float NOT NULL, "retailer_id" integer, "route_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b278d1cf80"
+FOREIGN KEY ("retailer_id")
+  REFERENCES "retailers" ("id")
+, CONSTRAINT "fk_rails_eba449c40b"
+FOREIGN KEY ("route_id")
+  REFERENCES "routes" ("id")
+)[0m
+  [1m[35m (36.3ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_retailer_id" ON "orders"  ("retailer_id")[0m
+  [1m[35m (43.6ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_route_id" ON "orders"  ("route_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142517"]]
+  [1m[35m (18.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20170326142617)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (100.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "title" character varying NOT NULL, "content" text NOT NULL, "dateComment" date, "order_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_453b7b85cf"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+)[0m
+  [1m[35m (41.9ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_order_id" ON "comments"  ("order_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142617"]]
+  [1m[35m (15.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrderProducts (20170326142804)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (49.8ms)[0m  [1m[35mCREATE TABLE "order_products" ("id" serial primary key, "quantity" float NOT NULL, "price" float NOT NULL, "offered_product_id" integer, "order_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_82342e2ff8"
+FOREIGN KEY ("offered_product_id")
+  REFERENCES "offered_products" ("id")
+, CONSTRAINT "fk_rails_f40b8ccee4"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+)[0m
+  [1m[35m (38.9ms)[0m  [1m[35mCREATE  INDEX  "index_order_products_on_offered_product_id" ON "order_products"  ("offered_product_id")[0m
+  [1m[35m (58.0ms)[0m  [1m[35mCREATE  INDEX  "index_order_products_on_order_id" ON "order_products"  ("order_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170326142804"]]
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCalificationToComment (20170329050348)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "comments" ADD "calification" integer NOT NULL[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170329050348"]]
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoordinates (20170330025545)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.8ms)[0m  [1m[35mCREATE TABLE "coordinates" ("id" serial primary key, "latitude" float, "longitude" float, "route_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f52ea6c840"
+FOREIGN KEY ("route_id")
+  REFERENCES "routes" ("id")
+)[0m
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE  INDEX  "index_coordinates_on_route_id" ON "coordinates"  ("route_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170330025545"]]
+  [1m[35m (12.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetupEarthdistance (20170330201310)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class SetupEarthdistance < ActiveRecord::Migration[4.2] (called from load at /home/juan/.rbenv/versions/2.4.0/bin/rake:22)
+  [1m[35m (201.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS cube[0m
+  [1m[35m (35.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS earthdistance[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170330201310"]]
+  [1m[35m (23.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-30 20:14:17 UTC], ["updated_at", 2017-03-30 20:14:17 UTC]]
+  [1m[35m (11.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "asdsad@unal.edu.co"]]
+  [1m[36mDistributor Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "asdsad@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mDistributor Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "55446556"], ["LIMIT", 1]]
+  [1m[35mSQL (21.6ms)[0m  [1m[32mINSERT INTO "distributors" ("uid", "encrypted_password", "confirmation_token", "confirmation_sent_at", "name", "email", "phoneNumber", "photo", "tokens", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["uid", "asdsad@unal.edu.co"], ["encrypted_password", "$2a$10$cQXW93uUzt7EzHrKjFSiKuqjNAOQiCygTGbHz9IYLhwY9YYl8/Uy6"], ["confirmation_token", "Eh3Qs1UD-anbhKwGxj6F"], ["confirmation_sent_at", 2017-03-30 20:18:57 UTC], ["name", "asdsad"], ["email", "asdsad@unal.edu.co"], ["phoneNumber", "55446556"], ["photo", "asdasdasd"], ["tokens", "{}"], ["created_at", 2017-03-30 20:18:57 UTC], ["updated_at", 2017-03-30 20:18:57 UTC]]
+  [1m[35m (15.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "retailers" WHERE "retailers"."provider" = $1 AND "retailers"."email" = $2[0m  [["provider", "email"], ["email", "asdsad@unal.edu.co"]]
+  [1m[36mRetailer Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "retailers" WHERE "retailers"."email" = $1 LIMIT $2[0m  [["email", "asdsad@unal.edu.co"], ["LIMIT", 1]]
+  [1m[36mRetailer Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "retailers" WHERE "retailers"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "55446556"], ["LIMIT", 1]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "retailers" ("uid", "encrypted_password", "confirmation_token", "confirmation_sent_at", "name", "email", "phoneNumber", "photo", "latitude", "longitude", "tokens", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["uid", "asdsad@unal.edu.co"], ["encrypted_password", "$2a$10$zVPe3DqFGkxMc5SMQOSBWuLrNzOf3Uv2G9A2/DxeZAkgDfatgg1kO"], ["confirmation_token", "VP7pmza5zjPzRbx-Yu_6"], ["confirmation_sent_at", 2017-03-30 20:20:53 UTC], ["name", "asdsad"], ["email", "asdsad@unal.edu.co"], ["phoneNumber", "55446556"], ["photo", "asdasdasd"], ["latitude", 0.78554], ["longitude", -87.5465], ["tokens", "{}"], ["created_at", 2017-03-30 20:20:53 UTC], ["updated_at", 2017-03-30 20:20:53 UTC]]
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m

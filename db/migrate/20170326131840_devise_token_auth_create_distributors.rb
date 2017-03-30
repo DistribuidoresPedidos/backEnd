@@ -41,7 +41,7 @@ class DeviseTokenAuthCreateDistributors < ActiveRecord::Migration[5.0]
       t.float :latitude
       t.float :longitude
       ## Tokens
-      
+      t.json :tokens      
 
       t.timestamps
     end

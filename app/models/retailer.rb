@@ -40,5 +40,5 @@ class Retailer < ActiveRecord::Base
       end
     end
     Retailer.retailers_by_ids(s1)
-
+  end
 end
