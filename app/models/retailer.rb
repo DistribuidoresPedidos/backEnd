@@ -6,6 +6,9 @@ class Retailer < ActiveRecord::Base
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
   validates :name, :email, :phoneNumber,  presence: true
-  validates :email, :phoneNumber, uniqueness: true 
-   
+  validates :email, :phoneNumber, uniqueness: true
+
+"""	def  self.retailers_by_product(product, page=1 , per_page=10)
+		joins(retailer: order: )
+	end"""
 end

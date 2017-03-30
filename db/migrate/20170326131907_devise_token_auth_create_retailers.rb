@@ -40,9 +40,10 @@ class DeviseTokenAuthCreateRetailers < ActiveRecord::Migration[5.0]
       t.string :email , :null=> false 
       t.string :phoneNumber, :null=> false , :unique => true
       t.string :photo
-      
+      t.float :latitude
+      t.float :longitude
       ## Tokens
-      t.json :location
+      
 
 
       t.timestamps
