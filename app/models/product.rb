@@ -17,6 +17,19 @@ class Product < ApplicationRecord
             distributor_id: distributor
         }).paginate(:page => page , :per_page=> per_page )
 
+    end
+
+    def self.products_by_param(param, retailerId, page=1 , per_page=10)
+        @selected = 'products.name, offeredProducts.price, products.weight, products.photo, distributor.name'
+        joins(offeredProducts: :distributors).select(@selected)
+        .group("products.id")
+        .where("products.name LIKE ?", "#{name.downcase}")
+    end
+
+    def self.find_by_retailer(param, retailer, page=1 , per_page=10)
+        
+    end
+
     #another solution AKS!!
     '''
     def self.products_by_distributor(distributor, page=1 , per_page=> 10)
@@ -29,7 +42,6 @@ class Product < ApplicationRecord
         --2 or
         .where("offeredproducts.distributor= ?", distributor)
         .references(:offeredProducts)
-   
+    end
     '''
-
 end

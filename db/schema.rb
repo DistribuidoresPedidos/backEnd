@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329050348) do
+ActiveRecord::Schema.define(version: 20170330035229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",        null: false
@@ -24,6 +26,15 @@ ActiveRecord::Schema.define(version: 20170329050348) do
     t.datetime "updated_at",   null: false
     t.integer  "calification", null: false
     t.index ["order_id"], name: "index_comments_on_order_id", using: :btree
+  end
+
+  create_table "coordinates", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_coordinates_on_route_id", using: :btree
   end
 
   create_table "distributors", force: :cascade do |t|
@@ -119,7 +130,8 @@ ActiveRecord::Schema.define(version: 20170329050348) do
     t.string   "email",                                    null: false
     t.string   "phoneNumber",                              null: false
     t.string   "photo"
-    t.json     "location"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["confirmation_token"], name: "index_retailers_on_confirmation_token", unique: true, using: :btree
@@ -130,7 +142,6 @@ ActiveRecord::Schema.define(version: 20170329050348) do
 
   create_table "routes", force: :cascade do |t|
     t.string   "name",           null: false
-    t.jsonb    "sites",          null: false
     t.integer  "distributor_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -138,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170329050348) do
   end
 
   add_foreign_key "comments", "orders"
+  add_foreign_key "coordinates", "routes"
   add_foreign_key "offered_products", "distributors"
   add_foreign_key "offered_products", "products"
   add_foreign_key "order_products", "offered_products"

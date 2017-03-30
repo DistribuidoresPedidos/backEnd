@@ -11,5 +11,9 @@ class Distributor < ActiveRecord::Base
   validates :name, :email, :phoneNumber,:photo,  presence: true
   validates :email, :phoneNumber, uniqueness: true 
 
+
+  def self.all_routes_id()
+    includes(:routes).select('routes.id')
+  end
   
 end

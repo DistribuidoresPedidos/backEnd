@@ -34,6 +34,8 @@ gem 'devise'
 gem 'omniauth'
 #diferentes sefmentos de red cross-domain 
 gem 'rack-cors', :require => 'rack/cors'
+gem 'haversine'
+gem 'activerecord-postgres-earthdistance'
 
 #luego correr el comando rails g devise_token_auth:install [USER_CLASS] [MOUNT_PATH] User and Path 
 
