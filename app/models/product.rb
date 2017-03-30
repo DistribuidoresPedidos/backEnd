@@ -29,9 +29,9 @@ class Product < ApplicationRecord
     def self.find_by_retailer(param, retailer, page=1 , per_page=10)
         
     end
-
+'''
     #another solution AKS!!
-    '''
+    
     def self.products_by_distributor(distributor, page=1 , per_page=> 10)
         .includes(:offeredProducts)
         .group("product.id")
@@ -43,5 +43,5 @@ class Product < ApplicationRecord
         .where("offeredproducts.distributor= ?", distributor)
         .references(:offeredProducts)
     end
-    '''
+   ''' 
 end

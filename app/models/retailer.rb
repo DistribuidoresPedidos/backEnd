@@ -20,12 +20,11 @@ class Retailer < ActiveRecord::Base
   end
 
   def self.retailers_by_ids(ids)
-    where(comments: {
+    includes(:orders, :distributors)
+    .where(retailers: {
       id: ids  
     })
   end
-
-  
 
   def self.suggest_to_distributor(distributor, page=1 , per_page=10)
     s1 = Set.new
@@ -34,11 +33,11 @@ class Retailer < ActiveRecord::Base
     routes.each do |i|
       possibleRetailers.each do |j|
         c = Coordinates.within_radius(100,j.latitude, j.longitude).find_by_route_id(i)
-        if c
+        if c.size() > 0
           s1.add(j.id)
         end
       end
     end
-    Retailer.retailers_by_ids(s1)
+    Retailer.retailers_by_ids(s1.to_a)
   end
 end

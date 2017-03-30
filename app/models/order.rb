@@ -21,8 +21,8 @@ def self.order_by_id(id){
   }
 end
 #retrieve all retailer's shop --Aks deliveres instead of self? 
-def self.load_order_by_retailer(retailer, page=1, per_page=10)
-  delivered.includes(:retailer)
+def self.delivered.load_order_by_retailer(retailer, page=1, per_page=10)
+  includes(:retailer)
     .where( orders:{
       retailer_id: retailer
     }).paginate(:page=> page, :per_page=> per_page)
@@ -30,8 +30,8 @@ def self.load_order_by_retailer(retailer, page=1, per_page=10)
 
 #retrive all distributor's sell --Aks delivered
 
-  def self.load_order_by_distributor(distributor, page=1, per_page=10)
-    delivered.includes(:route)
+  def self.delivered.load_order_by_distributor(distributor, page=1, per_page=10)
+    includes(:route)
   end
 
 def self.order_by_arrivDate(date, page=1, per_page=10)
