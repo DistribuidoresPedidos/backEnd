@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330201310) do
+ActiveRecord::Schema.define(version: 20170330201457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20170330201310) do
   end
 
   create_table "coordinates", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lng"
     t.integer  "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "ll_to_earth(lat, lng)", name: "coordinates_earthdistance_ix", using: :gist
     t.index ["route_id"], name: "index_coordinates_on_route_id", using: :btree
   end
 
