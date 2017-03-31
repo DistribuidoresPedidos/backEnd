@@ -1,7 +1,7 @@
 require 'set'
 class Retailer < ActiveRecord::Base
   has_many :orders 
-  has_many :distributors, :through => :orders
+  has_many :comments, :through => :orders
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -10,27 +10,30 @@ class Retailer < ActiveRecord::Base
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true
 
+  def self.load_retailers(page=1 , per_page=10)
+    includes(orders:[:orderProducts, :comments])
+    .paginate(:page => page,:per_page => per_page)
+  end
 
-  def self.distributor_by_retailers(retailer, page=1 , per_page=10 )
-    includes(orders: :routes).select('distributors.latitude, distributors.longitude')
-    .group('distributors.id')
-    .where(orders: {
-      retailer_id: retailer
-    }).paginate(:page => page,:per_page => per_page)
+  def self.retailer_by_id(id)
+    includes(orders:[:orderProducts, :comments])
+    .find_by_id(id)
   end
 
   def self.retailers_by_ids(ids)
-    includes(:orders, :distributors)
-    .where(retailers: {
-      id: ids  
+    includes(orders:[:orderProducts, :comments])
+    .where(retailers:{
+      id: ids 
     })
   end
 
-  def self.suggest_to_retailer(retailer, page=1 , per_page=10)
+  
+
+  def self.suggest_to_distributor(retailer, page=1 , per_page=10)
     s1 = Set.new
-    possibleDistributors = distributor_by_retailer(retailer)
+    possibleDistributors = Distributor.distributors_by_retailer(retailer)
     #routes = distributor.all_routes_id()
-    possibleDistributor.each do |j|
+    possibleDistributors.each do |j|
       routes = j.all_routes_id()
       routes.each do |i| 
         c = Coordinates.within_radius(100,retailer.latitude, retailer.longitude).find_by_route_id(i)
@@ -40,8 +43,7 @@ class Retailer < ActiveRecord::Base
       end 
     end
 
-    Distributor.retailers_by_ids(s1.to_a)
+    Retailer.retailers_by_ids(s1.to_a)
   end
 
-  
 end

@@ -26,7 +26,15 @@ class Distributor < ActiveRecord::Base
     load_distributors(page, per_page)
     .where(distributors:{
       id: ids 
-  })
-end
+    })
+  end
+
+  def self.distributors_by_retailer(retailer, page=1 , per_page=10 )
+    includes(:orders).select('distributors.latitude, distributors.longitude')
+    .group('distributors.id')
+    .where(orders: {
+      retailer_id: retailer
+    }).paginate(:page => page,:per_page => per_page)
+  end
 
 end

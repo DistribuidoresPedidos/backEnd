@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
   end
     
 
-  def self.comments_by_distributor(distributor, page=1, per_page=>10)
+  def self.comments_by_distributor(distributor, page=1, per_page=10)
     includes(order: {route: :distributor})
       .where(routes:{
         distributor_id: distributor 

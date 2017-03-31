@@ -2,7 +2,7 @@ class Route < ApplicationRecord
   belongs_to :distributor
   has_many :orders
   has_many :coordinates
-  validates :name , :sites , presence: true
+  validates :name, presence: true
 
   def self.load_routes(page=1, per_page=10)
     includes(:orders, :coordinates, distributor: [:routes] )
