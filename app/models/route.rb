@@ -5,7 +5,7 @@ class Route < ApplicationRecord
   validates :name , :sites , presence: true
 
   def self.load_routes(page=1, per_page=10)
-    includes(distributor: [:routes], :orders, :coordinates)
+    includes(:orders, :coordinates, distributor: [:routes] )
     .pagination(:page=> page, :per_page=> per_page)
   end
   
