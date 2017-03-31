@@ -3,6 +3,8 @@ class Route < ApplicationRecord
   has_many :orders
   has_many :coordinates
   validates :name , :sites , presence: true
+
+  
 end
 
 
