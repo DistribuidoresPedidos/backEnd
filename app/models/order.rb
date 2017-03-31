@@ -11,12 +11,12 @@ class Order < ApplicationRecord
 scope :delivered where(state: 'delivered')
 
 def self.load_orders(page=1, per_page=10)
-    includes(:retailer, :route, :orderProducts, :comments)
+    includes(retailer:[:orders], route:[:orders], :orderProducts, :comments)
     .paginate(:page => page, :per_page => per_page)
 end 
 #retrieve a order
 def self.order_by_id(id)
-  includes(:retailer, :route,:orderProducts, :comments)
+  includes( retailer:[:orders], route:[:orders], :orderProducts, :comments)
     .find_by_id(id)
   
 end
@@ -60,7 +60,5 @@ def self.order_by_exitDate(date, page=1, per_page=10)
       route_id: route
     }).paginate(:page=> page, :per_page=> per_page)
   end
-  def self.order_by_orderProduct(orderProduct)
-    joins()
-  end
+  
 end 

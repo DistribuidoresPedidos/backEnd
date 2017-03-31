@@ -23,7 +23,7 @@ class Product < ApplicationRecord
     #load distributor's products
 
     def self.products_by_distributor(distributor, page=1 , per_page=> 10)
-        includes(:offeredProducts, :distributors)
+        includes(:offeredProducts)
         
         .where(offeredProducts:{
             distributor_id= distributor 
