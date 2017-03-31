@@ -4,7 +4,6 @@ class CreateCoordinates < ActiveRecord::Migration[5.0]
       t.float :lat
       t.float :lng
       t.references :route, foreign_key: true
-
       t.timestamps
     end
   end

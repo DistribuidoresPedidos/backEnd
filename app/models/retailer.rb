@@ -12,10 +12,10 @@ class Retailer < ActiveRecord::Base
 
 
   def self.retailers_by_distributor(distributor, page=1 , per_page=10 )
-    includes(orders: :routes).select('retailers.latitude, retailers.longitude')
+    includes(:orders).select('retailers.latitude, retailers.longitude')
     .group('retailers.id')
-    .where(routes: {
-      distributor_id: distributor  
+    .where(orders: {
+      id: distributor  
     }).paginate(:page => page,:per_page => per_page)
   end
 
@@ -36,10 +36,10 @@ class Retailer < ActiveRecord::Base
         if c.size() > 0
           s1.add(j.id)
         end
-      end
+      end 
     end
-
     Retailer.retailers_by_ids(s1.to_a)
   end
-end
 
+  
+end
