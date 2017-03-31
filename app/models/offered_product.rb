@@ -27,4 +27,5 @@ class OfferedProduct < ApplicationRecord
   		distributor_id: distributor
 	}).paginate(:page => page, :per_page=> per_page)
   end
+  
 end

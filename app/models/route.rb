@@ -15,6 +15,7 @@ class Route < ApplicationRecord
         distributor_id: distributor
       })
   end
+
 end
 
 

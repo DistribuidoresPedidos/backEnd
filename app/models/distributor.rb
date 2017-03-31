@@ -28,8 +28,6 @@ class Distributor < ActiveRecord::Base
     .where(:distributors:{
       id: ids 
   })
-  end
+end
 
-
-  
 end

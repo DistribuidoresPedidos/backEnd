@@ -61,4 +61,10 @@ def self.order_by_exitDate(date, page=1, per_page=10)
     }).paginate(:page=> page, :per_page=> per_page)
   end
   
+  def self.order_by_orderProduct(orderProduct)
+    includes(:orderProducts)
+    .where(order_products:{
+      id: orderProduct
+    })
+  end
 end 
