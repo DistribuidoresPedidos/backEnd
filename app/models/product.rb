@@ -10,7 +10,7 @@ class Product < ApplicationRecord
     #load distributor's products
 
     def self.products_by_distributor(distributor, page=1 , per_page=> 10)
-        includes(:offeredProducts)
+        includes(:offeredProducts, :distributors)
         
         .where(offeredProducts:{
             distributor_id= distributor 
@@ -23,9 +23,6 @@ class Product < ApplicationRecord
         .where("products.name LIKE ?", "#{name.downcase}")
     end
 
-    def self.find_by_retailer(param, retailer, page=1 , per_page=10)
-        
-    end
 '''
     #another solution AKS!!
     
