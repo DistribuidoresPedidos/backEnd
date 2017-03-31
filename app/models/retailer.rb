@@ -37,10 +37,11 @@ class Retailer < ActiveRecord::Base
         if c.size() > 0
           s1.add(j.id)
         end
-      end
+      end 
     end
 
     Distributor.retailers_by_ids(s1.to_a)
   end
-end
 
+  
+end

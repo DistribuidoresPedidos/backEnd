@@ -16,7 +16,7 @@ class OfferedProduct < ApplicationRecord
 
   def self.offered_products_by_ids(ids, page = 1, per_page = 10)
   	load_offered_products(page, per_page)
-  	.where(:offeredProducts:{
+  	.where(offeredProducts:{
   		id: ids	
 	})
   end

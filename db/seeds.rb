@@ -1,6 +1,6 @@
 Distributor.delete_all
 Retailer.delete_all
-Product.delete_all
+
 
 Distributor.create(name:'HKgZO', email:'mlJW@unal.edu.com', phoneNumber:'0893932577', photo:'siwqnkqyeD', latitude:61.2104570578, longitude:22.765837072, password:'MvCwcbqw', password_confirmation:'MvCwcbqw')
 Distributor.create(name:'TVabb', email:'efyE@unal.edu.com', phoneNumber:'2407095018', photo:'KILWuHABnx', latitude:-12.3619035252, longitude:-13.7771129146, password:'HViLoDUL', password_confirmation:'HViLoDUL')

@@ -13,14 +13,13 @@ class Distributor < ActiveRecord::Base
   validates :email, :phoneNumber, uniqueness: true 
 
   def self.load_distributors(page=1 , per_page=10)
-    includes(offeredProducts:[:orderProduct], :products, routes:[:coordinates], :orders)
+    includes(offeredProducts:[:orderProduct], :products , routes:[:coordinates] , :orders)
     .paginate(:page => page, :per_page => per_page)
   end
 
   def self.distributor_by_id(id)
-    includes(offeredProducts:[:orderProduct], :products, routes:[:coordinates], :orders)
+    includes(offeredProducts:[:orderProduct], :products , routes:[:coordinates] , :orders)
     .find_by_id(id)
-  }
   end
 
   def self.distributors_by_ids(ids, page = 1, per_page = 10)
