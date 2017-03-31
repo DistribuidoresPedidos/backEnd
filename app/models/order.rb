@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
 
 #ask the attribute
-scope :delivered where(state: 'deliver')
+scope :delivered where(state: 'delivered')
 
 def self.load_orders(page=1, per_page=10)
     includes(:retailer, :route)
@@ -30,8 +30,10 @@ def self.delivered.load_order_by_retailer(retailer, page=1, per_page=10)
 
 #retrive all distributor's sell --Aks delivered
 
+
   def self.delivered.load_order_by_distributor(distributor, page=1, per_page=10)
     includes(:route)
+
   end
 
 def self.order_by_arrivDate(date, page=1, per_page=10)

@@ -9,16 +9,13 @@ class Product < ApplicationRecord
 
     #load distributor's products
 
-    def self.products_by_distributor( distributor , page=1 , per_page=10 )
-        joins(:offeredProducts).select("products.id")
-        .group("products.id")
+    def self.products_by_distributor(distributor, page=1 , per_page=> 10)
+        includes(:offeredProducts)
+        
         .where(offeredProducts:{
-
-            distributor_id: distributor
-        }).paginate(:page => page , :per_page=> per_page )
-
+            distributor_id= distributor 
+        })
     end
-
     def self.products_by_param(param, retailerId, page=1 , per_page=10)
         @selected = 'products.name, offeredProducts.price, products.weight, products.photo, distributor.name'
         joins(offeredProducts: :distributors).select(@selected)

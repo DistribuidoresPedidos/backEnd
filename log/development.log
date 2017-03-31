@@ -612,6 +612,7 @@ Migrating to SetupEarthdistance (20170330035229)
   [1m[36mDistributor Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "jcru@unal.co"], ["LIMIT", 1]]
   [1m[36mDistributor Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."phoneNumber" = $1 LIMIT $2[0m  [["phoneNumber", "6545656"], ["LIMIT", 1]]
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+<<<<<<< Updated upstream
   [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
   [1m[35m (72.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "distributors" WHERE "distributors"."provider" = $1 AND "distributors"."email" = $2[0m  [["provider", "email"], ["email", "lacardenasv@unal.edu.co"]]
   [1m[36mDistributor Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "distributors" WHERE "distributors"."email" = $1 LIMIT $2[0m  [["email", "lacardenasv@unal.edu.co"], ["LIMIT", 1]]
@@ -2561,3 +2562,19 @@ FOREIGN KEY ("distributor_id")
   [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+=======
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1441219901760959145);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (35.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateCoordinates (20170330025545)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (436.4ms)[0m  [1m[35mCREATE TABLE "coordinates" ("id" serial primary key, "latitude" float, "longitude" float, "route_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f52ea6c840"
+FOREIGN KEY ("route_id")
+  REFERENCES "routes" ("id")
+)[0m
+  [1m[35m (43.3ms)[0m  [1m[35mCREATE  INDEX  "index_coordinates_on_route_id" ON "coordinates"  ("route_id")[0m
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170330025545"]]
+  [1m[35m (20.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetupEarthdistance (20170330035229)
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(1441219901760959145)[0m
+>>>>>>> Stashed changes
+  [1m[36mCoordinate Load (15.2ms)[0m  [1m[34mSELECT "coordinates".* FROM "coordinates"[0m
