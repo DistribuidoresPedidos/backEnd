@@ -27,17 +27,25 @@ class Retailer < ActiveRecord::Base
     })
   end
 
+  def self.retailers_by_distributor(distributor, page=1 , per_page=10 )
+    includes(orders: :route)
+    .where(routes: {
+      distributor_id: distributor
+    }).paginate(:page => page,:per_page => per_page)
+  end
+
   
 
-  def self.suggest_to_distributor(retailer, page=1 , per_page=10)
+
+  def self.suggest_to_distributor(distributor, page=1 , per_page=10)
     s1 = Set.new
-    possibleDistributors = Distributor.distributors_by_retailer(retailer)
+    possibleRetailers = Retailer.retailers_by_distributor(distributor)
     #routes = distributor.all_routes_id()
-    possibleDistributors.each do |j|
-      routes = j.all_routes_id()
-      routes.each do |i| 
-        c = Coordinates.within_radius(100,retailer.latitude, retailer.longitude).find_by_route_id(i)
-        if c.size() > 0
+    routes = Route.route_by_distributor(distributor, page, per_page)  
+    routes.each do |i|
+      possibleRetailers.each do |j| 
+        c = Coordinate.within_radius(1000000, j.latitude, j.longitude).find_by_route_id(i.id)
+        if c
           s1.add(j.id)
         end
       end 
@@ -47,3 +55,5 @@ class Retailer < ActiveRecord::Base
   end
 
 end
+
+

@@ -29,23 +29,23 @@ class Product < ApplicationRecord
         })
     end
     
-    def self.products_by_param(param, retailerId, page=1 , per_page=10)
-        @selected = 'product.name, offeredProduct.price, product.weight, product.photo, distributor.name'
-        joins(offeredProducts: :distributors).select(@selected)
-        .group("product.id")
-        .where("product.name LIKE ?", "#{name.downcase}")
+    def self.product_by_param(param)
+        includes(:offeredProducts).select('products.id')
+        .where("products.name LIKE ?", "#{param}")
     end
 
-    def self.products_by_param(param, page=1, per_page=10)
+    def self.products_by_param(param, retailer_id, page=1, per_page=10)
         s1 = Set.new
-        products_coordinates = Coordinate.find_by_product(product).group("product.id")
+        product_id = product_by_param(param)
+        products_coordinates = Coordinate.find_by_product(product_id)
+        retailer = Retailer.retailer_by_id(retailer_id)
         products_coordinates.each do |i|
-            c = Coordinate.within_radius(100, retailer.latitude, retailer.longitude)
+            c = Coordinate.within_radius(200, retailer.latitude, retailer.longitude)
             if c.size() > 0
-                s1.add(i.product_id)
+                s1.add(product_id)
             end
         end
-        Product.products_by_ids(s1, page, per_page)
+        Product.products_by_ids(s1.to_a, page, per_page)
     end
 
 '''

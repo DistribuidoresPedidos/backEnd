@@ -7,9 +7,11 @@ class Coordinate < ApplicationRecord
   	.find_by_id(id)
   end
 
-  def self.find_by_product(product)
-  	joins(routes: {distributors: :products})
-  	.where("product.name LIKE ?", "#{product.downcase}")
+  def self.find_by_product(product_id)
+  	includes(route: {distributor: :offeredProducts})
+    .where(offered_products:{
+        product_id: product_id
+    })
   end
 
 end

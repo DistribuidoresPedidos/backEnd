@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 20170330201457) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "state",       null: false
-    t.date     "exitDate",    null: false
-    t.date     "arrivalDate", null: false
+    t.date     "exitDate"
+    t.date     "arrivalDate"
     t.float    "totalPrice",  null: false
     t.integer  "retailer_id"
     t.integer  "route_id"

@@ -16,14 +16,14 @@ class OfferedProduct < ApplicationRecord
 
   def self.offered_products_by_ids(ids, page = 1, per_page = 10)
   	load_offered_products(page, per_page)
-  	.where(offeredProducts:{
+  	.where(offered_products:{
   		id: ids	
 	})
   end
 
   def self.offered_products_by_distributor(distributor, page=1, per_page=10)
-  	includes(:distributor).select("offeredProducts.*")
-  	.where(offeredProducts:{
+  	includes(:distributor)
+  	.where(offered_products:{
   		distributor_id: distributor
 	}).paginate(:page => page, :per_page=> per_page)
   end
