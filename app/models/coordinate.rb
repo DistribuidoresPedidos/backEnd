@@ -14,4 +14,11 @@ class Coordinate < ApplicationRecord
     })
   end
 
+  def self.find_by_offered_product(offered_product_id)
+    includes(route: {distributor: :offeredProducts})
+    .where(offered_products:{
+        id: offered_product_id
+    })
+  end
+
 end

@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :route
   has_many :orderProducts
   has_many :comments
+  has_many :offeredProducts, :through => :orderProducts
   validates :state , presence: true
   validates :totalPrice ,numericality: true, presence: true
 

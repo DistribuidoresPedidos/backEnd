@@ -12,11 +12,21 @@ class Product < ApplicationRecord
         .paginate(:page => page, :per_page => per_page)        
     end
 
+    def self.load_products_all()
+        includes(distributors:[:offeredProducts, :products, :routes])
+    end
 
     def self.products_by_ids(ids, page=1, per_page=10)
         load_products(page, per_page)
         .where(products:{
             id: ids    
+        })
+    end
+
+    def self.products_by_categories(categories)
+        includes(distributors:{routes: :coordinates})
+        .where(products:{
+            category: categories    
         })
     end
 
@@ -47,6 +57,17 @@ class Product < ApplicationRecord
         end
         Product.products_by_ids(s1.to_a, page, per_page)
     end
+
+    def self.categories_by_retailer(retailer_id)
+        unscoped
+        .includes(offeredProducts: {orders: :retailer})
+        .where(retailers:{
+           id: retailer_id
+        })
+       .distinct.pluck(:category)
+    end
+
+    
 
 '''
     #another solution AKS!!
