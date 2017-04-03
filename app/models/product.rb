@@ -44,19 +44,7 @@ class Product < ApplicationRecord
         .where("products.name LIKE ?", "#{param}")
     end
 
-    def self.products_by_param(param, retailer_id, page=1, per_page=10)
-        s1 = Set.new
-        product_id = product_by_param(param)
-        products_coordinates = Coordinate.find_by_product(product_id)
-        retailer = Retailer.retailer_by_id(retailer_id)
-        products_coordinates.each do |i|
-            c = Coordinate.within_radius(200, retailer.latitude, retailer.longitude)
-            if c.size() > 0
-                s1.add(product_id)
-            end
-        end
-        Product.products_by_ids(s1.to_a, page, per_page)
-    end
+    
 
     def self.categories_by_retailer(retailer_id)
        includes(offeredProducts: {orders: :retailer})

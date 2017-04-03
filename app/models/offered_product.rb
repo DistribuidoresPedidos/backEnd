@@ -7,11 +7,11 @@ class OfferedProduct < ApplicationRecord
 
 
   def self.load_offered_products(page = 1, per_page = 10)
-  	includes(:orderProducts, product:[:offeredProducts], distributor:[:routes])
+  	includes(:orderProducts, :product, distributor:[:routes])
   end
 
   def self.offered_product_by_id(id)
-  	includes(:orderProducts, product:[:offeredProducts], distributor:[:routes])
+  	includes(:orderProducts, :product, distributor:[:routes])
   	.find_by_id(id)
   end
 
@@ -47,6 +47,28 @@ class OfferedProduct < ApplicationRecord
         if c.size() > 0
             s1.add(i)
         end
+    end
+    s1.to_a
+  end
+
+  def self.offered_products_by_param(param, page=1, per_page=10)
+    includes(:product, distributor:{routes: :coordinates})
+    .where(products:{
+      name: param  
+    })
+
+  end
+
+  def self.offered_products_by_param_retailer(param, retailer_id, page=1, per_page=10)
+    s1 = Set.new
+    retailer = Retailer.retailer_by_id(retailer_id)
+    possible_offered_product = offered_products_by_param(param)
+    possible_offered_product.each do |i|
+      coordinates = Coordinate.find_by_offered_product(i)
+      c = coordinates.within_radius(400, retailer.latitude, retailer.longitude)
+      if c.size() > 0
+        s1.add(i)
+      end
     end
     s1.to_a
   end

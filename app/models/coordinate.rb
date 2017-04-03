@@ -23,4 +23,11 @@ class Coordinate < ApplicationRecord
     })
   end
 
+  def self.find_by_distributor(distributor)
+    includes(route: {distributor: :offeredProducts})
+    .where(distributors:{
+      id: distributor  
+    })
+  end
+
 end

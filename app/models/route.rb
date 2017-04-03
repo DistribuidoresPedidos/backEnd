@@ -13,7 +13,7 @@ class Route < ApplicationRecord
       load_routes(page, per_page)
       .where(routes:{
         distributor_id: distributor
-      }).paginate(:page=> page, :per_page=> per_page)
+      })
   end
 
   

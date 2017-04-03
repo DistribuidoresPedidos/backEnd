@@ -41,7 +41,12 @@ class Retailer < ActiveRecord::Base
     })
   end
   
-  
+  def self.retailer_by_category_products(categories)
+    includes(orders: {offeredProducts: :product})
+    .where(products: {
+      category: categories
+    })
+  end
 
   def self.suggest_to_distributor(distributor, page=1 , per_page=10)
     s1 = Set.new
@@ -61,14 +66,28 @@ class Retailer < ActiveRecord::Base
   end
 
 
-  def self.suggest_to_distributor_by_category(distributor, page=1 , per_page=10)
+  def self.suggest_to_distributor_by_category(distributor, page=1, per_page=10)
+    s1 = Set.new
+    categories_distributor = Product.categories_by_distributor(distributor);
+    possible_retailers = retailer_by_category_products(categories_distributor)
+    distributor_coordinates = Coordinate.find_by_distributor(distributor)
+    possible_retailers.each do |i|
+      c = distributor_coordinates.within_radius(450, i.latitude, i.longitude)
+      if c.size() > 0
+        s1.add(i)
+      end
+    end
+    s1.to_a
+  end
+
+  def self.suggest_to_distributor_by_category1(distributor, page=1 , per_page=10)
     s1 = Set.new
     possibleRetailers= []
     categories_distributor= Product.categories_by_distributor(distributor);
     puts categories_distributor
     categories_distributor.each do |category|
       cat_retailers= Retailer.retailer_by_category_product(category)
-      if cat_retailers.length>0
+      if cat_retailers.length
         cat_retailers.each do |retailer|
           possibleRetailers.push(retailer)  
           puts retailer.id
@@ -82,7 +101,7 @@ class Retailer < ActiveRecord::Base
       route_coordinates= Coordinate.find_by_route_id(i.id)
       possibleRetailers.each do |r|
         route_coordinates.each do |j| 
-          c = Coordinate.within_radius(200, r.latitude, r.longitude)
+          c = Coordinate.within_radius(2000000, r.latitude, r.longitude)
           #puts "hola"
           #puts c     
           
