@@ -5,7 +5,7 @@ class Product < ApplicationRecord
     validates :name, :category, :weight, :photo, presence: true
     validates :weight , numericality: true
 
-    default_scope {order('products.name ASC')}
+  #  default_scope {order('products.name ASC')}
 
     def self.load_products(page=1 , per_page=10)
         includes(distributors:[:offeredProducts, :products, :routes])
@@ -34,7 +34,7 @@ class Product < ApplicationRecord
 
     def self.products_by_distributor(distributor, page=1 , per_page=10)
         includes(:offeredProducts)
-        .where(offeredProducts:{
+        .where(offered_products:{
             distributor_id: distributor 
         })
     end
@@ -59,16 +59,21 @@ class Product < ApplicationRecord
     end
 
     def self.categories_by_retailer(retailer_id)
-        unscoped
-        .includes(offeredProducts: {orders: :retailer})
+       includes(offeredProducts: {orders: :retailer})
         .where(retailers:{
            id: retailer_id
         })
        .distinct.pluck(:category)
     end
 
-    
+    def self.categories_by_distributor(distributor_id)
+        includes(:offeredProducts)
+            .where(offered_products:{
+                distributor_id: distributor_id
+            }).distinct.pluck(:category)
+    end
 
+    
 '''
     #another solution AKS!!
     

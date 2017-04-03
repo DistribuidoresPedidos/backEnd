@@ -3,8 +3,10 @@ class Coordinate < ApplicationRecord
   acts_as_geolocated
 
   def self.find_by_route_id(id)
-  	includes(route:[:orders])
-  	.find_by_id(id)
+  	includes(:route)
+  	.where(coordinates: {
+      route_id: id
+    })
   end
 
   def self.find_by_product(product_id)
