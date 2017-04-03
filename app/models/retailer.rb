@@ -65,27 +65,24 @@ class Retailer < ActiveRecord::Base
     s1 = Set.new
     possibleRetailers= []
     categories_distributor= Product.categories_by_distributor(distributor);
-    puts categories_distributor
+    
     categories_distributor.each do |category|
       cat_retailers= Retailer.retailer_by_category_product(category)
       if cat_retailers.length>0
         cat_retailers.each do |retailer|
           possibleRetailers.push(retailer)  
-          puts retailer.id
+    
         end
       end
     end
 
     routes = Route.route_by_distributor(distributor, page, per_page)  
-    #puts routes
+    
     routes.each do |i|
       route_coordinates= Coordinate.find_by_route_id(i.id)
       possibleRetailers.each do |r|
         route_coordinates.each do |j| 
           c = Coordinate.within_radius(200, r.latitude, r.longitude)
-          #puts "hola"
-          #puts c     
-          
           if c.size()>0
             
             s1.add(j.id)
