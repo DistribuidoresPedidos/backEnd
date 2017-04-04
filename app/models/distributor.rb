@@ -12,12 +12,12 @@ class Distributor < ActiveRecord::Base
   validates :email, :phoneNumber, uniqueness: true 
 
   def self.load_distributors(page=1 , per_page=10)
-    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
+    includes( :products, offeredProducts:[:orderProducts], routes:[:coordinates])
     .paginate(:page => page, :per_page => per_page)
   end
 
   def self.distributor_by_id(id)
-    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
+    includes(:products, offeredProducts:[:orderProducts], routes:[:coordinates])
     .find_by_id(id)
   end
 
