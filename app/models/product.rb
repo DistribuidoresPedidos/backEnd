@@ -62,19 +62,5 @@ class Product < ApplicationRecord
     end
 
     
-'''
-    #another solution AKS!!
-    
-    def self.products_by_distributor(distributor, page=1 , per_page=> 10)
-        .includes(:offeredProducts)
-        .group("product.id")
-        --1
-        .where(offeredProducts:{
-            distributor_id= distributor 
-        })
-        --2 or
-        .where("offeredproducts.distributor= ?", distributor)
-        .references(:offeredProducts)
-    end 
-   ''' 
+
 end
