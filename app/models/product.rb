@@ -27,14 +27,14 @@ class Product < ApplicationRecord
         load_products(page, per_page)
         .where(products:{
             id: ids    
-        })
+        }).paginate(:page => page, :per_page => per_page)       
     end
 
     def self.products_by_categories(categories, page=1, per_page=10)
         includes(distributors:{routes: :coordinates})
         .where(products:{
             category: categories    
-        })
+        }).paginate(:page => page, :per_page => per_page)       
     end
 
     #load distributor's products
@@ -43,18 +43,17 @@ class Product < ApplicationRecord
         includes(:offeredProducts)
         .where(offered_products:{
             distributor_id: distributor 
-        })
+        }).paginate(:page => page, :per_page => per_page)       
     end
    
-
-    
-
+   
     def self.categories_by_retailer(retailer_id, page=1, per_page=10)
        includes(offeredProducts: {orders: :retailer})
         .where(retailers:{
            id: retailer_id
         })
        .distinct.pluck(:category)
+       
     end
 
     def self.categories_by_distributor(distributor_id,  page=1, per_page=10)

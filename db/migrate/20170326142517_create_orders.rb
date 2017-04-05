@@ -12,3 +12,4 @@ class CreateOrders < ActiveRecord::Migration[5.0]
     end
   end
 end
+

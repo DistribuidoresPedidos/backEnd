@@ -2,21 +2,20 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
   before_action :authenticate_distributor!, only: [:update, :create, :destroy]
   # GET /products
+  # GET distributors/:id/products
   def index
   #duda
     if params.has_key?(:distributor_id)
-      @products = Product.products_by_distributor(params[:distributor_id],@page,@per_page)  
+      @products = Product.products_by_distributor(params[:distributor_id],params[:page],params[:per_page])  
     else
-      @products = Product.load_products(@page,@per_page)
+      @products = Product.load_products(params[:page],params[:per_page])
     end
 
     render json: @products, status: :ok
   end
 
-  # GET /products/1
+  # GET distributors/:id/products/1
   def show
-
-    @product= Product.product_by_id(product_params)
     render json: @product, status: :ok
   end
 
@@ -48,15 +47,15 @@ class ProductsController < ApplicationController
   def products_by_categories
     
     if params.has_key?(:distributor_id)
-      @products = Product.categories_by_distributor(params[:distributor_id],@page,@per_page)
+      @products = Product.categories_by_distributor(params[:distributor_id],params[:page],params[:per_page])
     elsif params.has_key?(:retailer_id)
-      @products = Product.categories_by_retailer(params[:retailer_id],@page,@per_page)
+      @products = Product.categories_by_retailer(params[:retailer_id],params[:page],params[:per_page])
     else
-     @products= products_by_categories(categories, @page, @per_page)
+     @products= products_by_categories(params[:category], params[:page],params[:per_page])
     end    
     render json: @products
   
-end
+  end
 
   def products_by_ids
     ids= set_ids
@@ -67,7 +66,15 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      
+      if params.has_key?(:distributor_id)
+        @products = Product.products_by_distributor(params[:distributor_id], params[:page],params[:per_page])  
+      else
+        @products= Product.products_by_ids(params[:id],params[:page],params[:per_page])
+      end
+    
+      @product= @products.product_by_id(params[:id])
+      
     end
 
     # Only allow a trusted parameter "white list" through.

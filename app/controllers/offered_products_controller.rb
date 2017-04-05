@@ -3,6 +3,12 @@ class OfferedProductsController < ApplicationController
 
   # GET /offered_products
   def index
+    
+    if params.has_key?(:distributor_id)
+      @offered_products = OfferedProduct.offered_products_by_distributor(params[:distributor_id],@page,@per_page)  
+    else
+      @products = Product.load_products(@page,@per_page)
+    end
     @offered_products = OfferedProduct.all
 
     render json: @offered_products
@@ -41,6 +47,8 @@ class OfferedProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offered_product
+
+
       @offered_product = OfferedProduct.find(params[:id])
     end
 
