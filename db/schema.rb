@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330035229) do
+ActiveRecord::Schema.define(version: 20170330201457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20170330035229) do
   end
 
   create_table "coordinates", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lng"
     t.integer  "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "ll_to_earth(lat, lng)", name: "coordinates_earthdistance_ix", using: :gist
     t.index ["route_id"], name: "index_coordinates_on_route_id", using: :btree
   end
 
@@ -57,7 +58,9 @@ ActiveRecord::Schema.define(version: 20170330035229) do
     t.string   "email",                                    null: false
     t.string   "phoneNumber",                              null: false
     t.string   "photo",                                    null: false
-    t.json     "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.json     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["confirmation_token"], name: "index_distributors_on_confirmation_token", unique: true, using: :btree
@@ -89,8 +92,8 @@ ActiveRecord::Schema.define(version: 20170330035229) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "state",       null: false
-    t.date     "exitDate",    null: false
-    t.date     "arrivalDate", null: false
+    t.date     "exitDate"
+    t.date     "arrivalDate"
     t.float    "totalPrice",  null: false
     t.integer  "retailer_id"
     t.integer  "route_id"
@@ -132,6 +135,7 @@ ActiveRecord::Schema.define(version: 20170330035229) do
     t.string   "photo"
     t.float    "latitude"
     t.float    "longitude"
+    t.json     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["confirmation_token"], name: "index_retailers_on_confirmation_token", unique: true, using: :btree
