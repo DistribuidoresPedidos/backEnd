@@ -5,7 +5,7 @@ class OfferedProduct < ApplicationRecord
   has_many :orders, :through => :orderProducts
   validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
 
-
+#Solo returna los que han sido ordenados , más no todos los offeredProducts
   def self.load_offered_products(page = 1, per_page = 10)
   	includes(:orderProducts, :product, distributor:[:routes])
   end

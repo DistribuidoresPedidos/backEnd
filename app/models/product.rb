@@ -11,7 +11,7 @@ class Product < ApplicationRecord
         includes(distributors:[:offeredProducts, :products, :routes])
         .paginate(:page => page, :per_page => per_page)        
     end
-
+#hace los mismo que el metodo load_products quitarlo. 
     def self.load_products_all()
         includes(distributors:[:offeredProducts, :products, :routes])
     end
