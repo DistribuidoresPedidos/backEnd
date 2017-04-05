@@ -55,7 +55,7 @@ class Product < ApplicationRecord
     end
 
     def self.categories_by_distributor(distributor_id)
-        includes(:offeredProducts)
+        joins(:offeredProducts)
             .where(offered_products:{
                 distributor_id: distributor_id
             }).distinct.pluck(:category)

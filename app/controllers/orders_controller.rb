@@ -1,22 +1,21 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update, :destroy]
 
-  # GET /orders
+  # GET /retailers/:id/orders
   def index
-    @orders = Order.all
-
+    @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
     render json: @orders
   end
 
-  # GET /orders/1
+  # GET /retailers/:id/orders/1
   def show
+    @order = Order.load_order_by_retailer(params[:retailer_id]).find(params[:id])
     render json: @order
   end
 
   # POST /orders
   def create
     @order = Order.new(order_params)
-
     if @order.save
       render json: @order, status: :created, location: @order
     else
@@ -24,7 +23,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/1
+  # PATCH/PUT /retailers/:id/orders/1
   def update
     if @order.update(order_params)
       render json: @order
