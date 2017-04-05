@@ -10,7 +10,7 @@ class Retailer < ActiveRecord::Base
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true
 
-  def self.load_retailers(page=1 , per_page=10)
+  def self.load_retailers(page=1, per_page=10)
     includes(orders:[:orderProducts, :comments])
     .paginate(:page => page,:per_page => per_page)
   end
@@ -42,7 +42,7 @@ class Retailer < ActiveRecord::Base
   end
   
   def self.retailer_by_category_products(categories)
-    includes(orders: {offeredProducts: :product})
+    joins(orders: {offeredProducts: :product})
     .where(products: {
       category: categories
     })
