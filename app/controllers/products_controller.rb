@@ -3,14 +3,21 @@ class ProductsController < ApplicationController
   before_action :authenticate_distributor!, only: [:update, :create, :destroy]
   # GET /products
   def index
-    @products = Product.all
+  #duda
+    if params.has_key?(:distributor_id)
+      @products = Product.products_by_distributor(params[:distributor_id],@page,@per_page)  
+    else
+      @products = Product.load_products(@page,@per_page)
+    end
 
-    render json: @products
+    render json: @products, status: :ok
   end
 
   # GET /products/1
   def show
-    render json: @product
+
+    @product= Product.product_by_id(product_params)
+    render json: @product, status: :ok
   end
 
   # POST /products
@@ -38,6 +45,25 @@ class ProductsController < ApplicationController
     @product.destroy
   end
 
+  def products_by_categories
+    
+    if params.has_key?(:distributor_id)
+      @products = Product.categories_by_distributor(params[:distributor_id],@page,@per_page)
+    elsif params.has_key?(:retailer_id)
+      @products = Product.categories_by_retailer(params[:retailer_id],@page,@per_page)
+    else
+     @products= products_by_categories(categories, @page, @per_page)
+    end    
+    render json: @products
+  
+end
+
+  def products_by_ids
+    ids= set_ids
+    @products= Product.products_by_ids(ids, @þage, @per_page)
+
+    render json: @products, status: :ok
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -47,5 +73,14 @@ class ProductsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def product_params
       params.require(:product).permit(:name, :category, :weight, :photo)
+    end
+     
+    def set_ids
+        ids = nil
+      if params.has_key?(:product)
+        ids = params[:product][:ids]
+      end
+        ids ||= []
+        ids
     end
 end

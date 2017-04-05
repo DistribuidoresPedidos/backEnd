@@ -16,6 +16,13 @@ class Product < ApplicationRecord
         includes(distributors:[:offeredProducts, :products, :routes])
     end
 
+    def self.product_by_id(id)
+        includes(distributors:[:offeredProducts, :products, :routes])
+        .where(products:{
+            id: id
+        }
+        )
+    end
     def self.products_by_ids(ids, page=1, per_page=10)
         load_products(page, per_page)
         .where(products:{
@@ -23,7 +30,7 @@ class Product < ApplicationRecord
         })
     end
 
-    def self.products_by_categories(categories)
+    def self.products_by_categories(categories, page=1, per_page=10)
         includes(distributors:{routes: :coordinates})
         .where(products:{
             category: categories    
@@ -38,15 +45,11 @@ class Product < ApplicationRecord
             distributor_id: distributor 
         })
     end
-    
-    def self.product_by_param(param)
-        includes(:offeredProducts).select('products.id')
-        .where("products.name LIKE ?", "#{param}")
-    end
+   
 
     
 
-    def self.categories_by_retailer(retailer_id)
+    def self.categories_by_retailer(retailer_id, page=1, per_page=10)
        includes(offeredProducts: {orders: :retailer})
         .where(retailers:{
            id: retailer_id
@@ -54,7 +57,7 @@ class Product < ApplicationRecord
        .distinct.pluck(:category)
     end
 
-    def self.categories_by_distributor(distributor_id)
+    def self.categories_by_distributor(distributor_id,  page=1, per_page=10)
         joins(:offeredProducts)
             .where(offered_products:{
                 distributor_id: distributor_id
