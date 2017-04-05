@@ -3,13 +3,27 @@ class OrdersController < ApplicationController
 
   # GET /retailers/:id/orders
   def index
-    @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
+    if params.has_key?(:retailer_id)
+      @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
+    elsif params.has_key?(:distributor_id)
+      @orders = Order.load_order_by_distributor(params[:distributor_id], params[:page], params[:per_page])
+    else
+      @orders = Order.load_orders(params[:page], params[:per_page])
+    end
     render json: @orders
   end
 
   # GET /retailers/:id/orders/1
+  # GET /distributors/:id/orders/1  
   def show
-    @order = Order.load_order_by_retailer(params[:retailer_id]).find(params[:id])
+    if params.has_key?(:retailer_id)
+      @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
+    elsif params.has_key?(:distributor_id)
+      @orders = Order.load_order_by_distributor(params[:distributor_id], params[:page], params[:per_page])
+    else
+      @orders = Order.load_orders(params[:page], params[:per_page])
+    end
+    @order = @orders.order_by_id(params[:id])
     render json: @order
   end
 
@@ -17,7 +31,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      render json: @order, status: :created, location: @order
+      render json: @order, status: :created
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -36,6 +50,31 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
   end
+
+  # GET retailer|distributor/:id/orders_by_arrival_date
+  def orders_by_arrival_date
+   if params.has_key?(:retailer_id)
+      @orders = Order.order_by_arrivDate_retailer(params[:retailer_id], params[:arrivalDate], params[:page], params[:per_page])
+    elsif params.has_key?(:distributor_id)
+      @orders = Order.order_by_arrivDate_distributor(params[:distributor_id], params[:arrivalDate], params[:page], params[:per_page])
+    else
+      @orders = Order.load_orders(params[:page], params[:per_page])
+    end
+    render json: @orders
+  end
+
+  # GET retailer|distributor/:id/orders_by_exit_date
+  def orders_by_exit_date
+   if params.has_key?(:retailer_id)
+      @orders = Order.order_by_exitDate_retailer(params[:retailer_id], params[:exitDate], params[:page], params[:per_page])
+    elsif params.has_key?(:distributor_id)
+      @orders = Order.order_by_exitDate_distributor(params[:distributor_id], params[:exitDate], params[:page], params[:per_page])
+    else
+      @orders = Order.load_orders(params[:page], params[:per_page])
+    end
+    render json: @orders
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

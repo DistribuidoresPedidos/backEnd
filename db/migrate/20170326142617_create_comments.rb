@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.string :title, :null=>false
       t.text :content, :null=>false
       t.date :dateComment
+      t.integer :calification
       t.references :order, foreign_key: true
 
       t.timestamps

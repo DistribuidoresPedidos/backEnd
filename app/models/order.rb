@@ -12,12 +12,12 @@ class Order < ApplicationRecord
   scope :delivered, -> { where(state: 'delivered') }
 
   def self.load_orders(page=1, per_page=10)
-      includes(:orderProducts, :comments, retailer:[:orders], route:[:orders])
+      includes(:orderProducts, :comments, :route, :retailer, )
       .paginate(:page => page, :per_page => per_page)
   end 
   #retrieve a order
   def self.order_by_id(id)
-    includes(:orderProducts, :comments, retailer:[:orders], route:[:orders])
+    includes(:orderProducts, :comments, :retailer, :route)
       .find_by_id(id)
     
   end
@@ -26,30 +26,43 @@ class Order < ApplicationRecord
     load_orders(page, per_page)
       .where( orders:{
         retailer_id: retailer
-      }).delivered.paginate(:page=> page, :per_page=> per_page)
+      }).paginate(:page=> page, :per_page=> per_page)
    end
 
-  #retrive all distributor's sell --Aks delivered
+  #retrive all distributor's sell 
 
 
   def self.load_order_by_distributor(distributor, page=1, per_page=10)
     load_orders(page, per_page)
     .where(routes:{
       distributor_id: distributor 
-    }).delivered.paginate(:page=> page, :per_page=> per_page)
+    }).paginate(:page=> page, :per_page=> per_page)
 
   end
 
-  def self.order_by_arrivDate(date, page=1, per_page=10)
-    load_orders(page, per_page)
+  def self.order_by_arrivDate_retailer(retailer, date, page=1, per_page=10)
+    load_order_by_retailer(retailer, page, per_page)
       .where( orders:{
-        arrivalDate: date
+        arrivalDate: date.to_date
+      })
+  end
+
+  def self.order_by_arrivDate_distributor(distributor, date, page=1, per_page=10)
+    load_order_by_distributor(distributor, page, per_page)
+      .where( orders:{
+        arrivalDate: date.to_date
       })
   end 
 
+  def self.order_by_exitDate_retailer(retailer, date, page=1, per_page=10)
+    load_order_by_retailer(retailer, page, per_page)
+    .where(orders:{
+      exitDate: date 
+    })
+  end
 
-  def self.order_by_exitDate(date, page=1, per_page=10)
-    load_orders(page, per_page)
+  def self.order_by_exitDate_distributor(distributor, date, page=1, per_page=10)
+    load_order_by_distributor(distributor, page, per_page)
     .where(orders:{
       exitDate: date 
     })
