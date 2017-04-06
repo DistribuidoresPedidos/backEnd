@@ -7,13 +7,13 @@ Rails.application.routes.draw do
           resources :products 
           resources :offered_products
         end
-        mount_devise_token_auth_for 'Retailer', at: 'retai_path'
-        as :retailer do
-          resources :retailers do
-            resources :orders
-            resources :offered_products
-          end
+      mount_devise_token_auth_for 'Retailer', at: 'retai_path'
+      as :retailer do
+        resources :retailers do
+          resources :orders
+          resources :offered_products
         end
+      end
   mount_devise_token_auth_for 'Distributor', at: 'distri_path'
   as :distributor do
     resources :distributors, only: [:index, :show] do
