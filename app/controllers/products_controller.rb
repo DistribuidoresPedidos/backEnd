@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_distributor!, only: [:update, :create, :destroy]
   
   # GET /products
+  
   # GET distributors/:id/products
   def index
   #duda

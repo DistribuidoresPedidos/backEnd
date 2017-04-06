@@ -16,7 +16,8 @@ Rails.application.routes.draw do
         end
     end
   end
-
+  #route to get all products 
+  resources :products
 
 
  
