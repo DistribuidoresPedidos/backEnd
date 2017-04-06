@@ -8,7 +8,8 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  #route to get all products 
+  resources :products
 
 
   mount_devise_token_auth_for 'Distributor', at: 'distri_path'
