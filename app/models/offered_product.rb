@@ -8,6 +8,7 @@ class OfferedProduct < ApplicationRecord
 #Solo returna los que han sido ordenados , más no todos los offeredProducts
   def self.load_offered_products(page = 1, per_page = 10)
   	includes(:orderProducts, :product, distributor:[:routes])
+    .paginate(:page => page, :per_page=> per_page)
   end
 
   def self.offered_product_by_id(id)
@@ -19,7 +20,7 @@ class OfferedProduct < ApplicationRecord
   	load_offered_products(page, per_page)
   	.where(offered_products:{
   		id: ids	
-	})
+	}).paginate(:page => page, :per_page=> per_page)
   end
 
   def self.offered_products_by_distributor(distributor, page=1, per_page=10)
@@ -28,12 +29,18 @@ class OfferedProduct < ApplicationRecord
   		distributor_id: distributor
 	}).paginate(:page => page, :per_page=> per_page)
   end
-
-  def self.offered_products_by_categories(categories)
+  
+  def self.offered_products_by_retailer(retailer_id, page=1, per_page=10) 
+    includes(:orders)
+    .where(orders:{
+      retailer_id: retailer_id
+    }).paginate(:page => page, :per_page=> per_page)
+end
+  def self.offered_products_by_categories(categories, page=1, per_page=10)
     includes(:product, distributor:{routes: :coordinates})
     .where(products:{
         category: categories    
-    })
+    }).paginate(:page => page, :per_page=> per_page)
   end
 
   def self.suggest_to_retailer(retailer_id, page=1, per_page=10)
