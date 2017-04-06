@@ -3,6 +3,7 @@ class Distributor < ActiveRecord::Base
   has_many :offeredProducts
   has_many :products, :through => :offeredProducts
   has_many :routes
+  has_many :orders, :through => :routes
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -11,13 +12,13 @@ class Distributor < ActiveRecord::Base
   validates :name, :email, :phoneNumber,:photo,  presence: true
   validates :email, :phoneNumber, uniqueness: true 
 
-  def self.load_distributors(page=1 , per_page=10)
-    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
+  def self.load_distributors(page=1, per_page=10)
+    includes(:products, offeredProducts:[:orderProducts], routes:[:coordinates])
     .paginate(:page => page, :per_page => per_page)
   end
 
   def self.distributor_by_id(id)
-    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
+    includes(:products, offeredProducts:[:orderProducts], routes:[:coordinates])
     .find_by_id(id)
   end
 
@@ -28,8 +29,8 @@ class Distributor < ActiveRecord::Base
     })
   end
 
-  def self.distributors_by_retailer(retailer, page=1 , per_page=10 )
-    includes(:orders)
+  def self.distributors_by_retailer(retailer, page=1, per_page=10 )
+    includes(routes:[:orders])
     .group('distributors.id')
     .where(orders: {
       retailer_id: retailer
