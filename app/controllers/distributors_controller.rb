@@ -1,6 +1,7 @@
 class DistributorsController < ApplicationController
   before_action :set_distributor, only: [:show, :update, :destroy]
-
+  before_action :authenticate_retailer!, only: [:distributors_by_retailer]
+  before_action :authenticate_distributor!, except: [:distributors_by_retailer]
   # GET /distributors
   def index
     @distributors = Distributor.load_distributors(params[:page], params[:per_page])
