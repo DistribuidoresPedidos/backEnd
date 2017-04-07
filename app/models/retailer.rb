@@ -12,7 +12,7 @@ class Retailer < ActiveRecord::Base
   mount_uploader :photo, PictureUploader
 
   def self.load_retailers(page=1, per_page=10)
-    includes(orders:[:orderProducts, :comments])
+    includes(:comments,orders:[:orderProducts])
     .paginate(:page => page,:per_page => per_page)
   end
 
