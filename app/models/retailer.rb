@@ -9,6 +9,7 @@ class Retailer < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true
+  mount_uploader :photo, PictureUploader
 
   def self.load_retailers(page=1, per_page=10)
     includes(orders:[:orderProducts, :comments])

@@ -41,6 +41,9 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'haversine'
 gem 'activerecord-postgres-earthdistance'
 
+gem 'carrierwave', '~> 1.0'
+gem "fog"
+
 #luego correr el comando rails g devise_token_auth:install [USER_CLASS] [MOUNT_PATH] User and Path 
 
 group :development, :test do

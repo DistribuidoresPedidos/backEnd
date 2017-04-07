@@ -5,6 +5,8 @@ class Product < ApplicationRecord
     validates :name, :category, :weight, :photo, presence: true
     validates :weight , numericality: true
 
+    mount_uploader :photo, PictureUploader
+
   #  default_scope {order('products.name ASC')}
 
     def self.load_products(page=1 , per_page=10)
