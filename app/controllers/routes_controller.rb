@@ -4,14 +4,14 @@ class RoutesController < ApplicationController
   # GET /routes
   def index
     @routes = Route.route_by_distributor(params[:distributor_id])
-    render json: @routes
+    render json: @routes,root: "data", adapter: :json
   end
 
   # GET /routes/1
   def show
     @routes = Route.route_by_distributor(params[:distributor_id])
     @route = @routes.route_by_id(params[:id])
-    render json: @route
+    render json: @route,root: "data", adapter: :json
   end
 
   # POST /routes
@@ -19,7 +19,7 @@ class RoutesController < ApplicationController
     @route = Route.new(route_params)
 
     if @route.save
-      render json: @route, status: :created, location: @route
+      render json: @route, status: :created,root: "data", adapter: :json
     else
       render json: @route.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class RoutesController < ApplicationController
   # PATCH/PUT /routes/1
   def update
     if @route.update(route_params)
-      render json: @route
+      render json: @route,root: "data", adapter: :json
     else
       render json: @route.errors, status: :unprocessable_entity
     end

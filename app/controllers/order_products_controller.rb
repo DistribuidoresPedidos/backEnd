@@ -5,12 +5,12 @@ class OrderProductsController < ApplicationController
   def index
     @order_products = OrderProduct.all
 
-    render json: @order_products
+    render json: @order_products,root: "data", adapter: :json
   end
 
   # GET /order_products/1
   def show
-    render json: @order_product
+    render json: @order_product,root: "data", adapter: :json
   end
 
   # POST /order_products
@@ -18,7 +18,7 @@ class OrderProductsController < ApplicationController
     @order_product = OrderProduct.new(order_product_params)
 
     if @order_product.save
-      render json: @order_product, status: :created, location: @order_product
+      render json: @order_product, status: :created,root: "data", adapter: :json
     else
       render json: @order_product.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class OrderProductsController < ApplicationController
   # PATCH/PUT /order_products/1
   def update
     if @order_product.update(order_product_params)
-      render json: @order_product
+      render json: @order_product,root: "data", adapter: :json
     else
       render json: @order_product.errors, status: :unprocessable_entity
     end

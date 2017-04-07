@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
-    render json: @orders
+    render json: @orders,root: "data", adapter: :json
   end
 
   # GET /retailers/:id/orders/1
@@ -24,14 +24,14 @@ class OrdersController < ApplicationController
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
     @order = @orders.order_by_id(params[:id])
-    render json: @order
+    render json: @order,root: "data", adapter: :json
   end
 
   # POST /orders
   def create
     @order = Order.new(order_params)
     if @order.save
-      render json: @order, status: :created
+      render json: @order, status: :created,root: "data", adapter: :json
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /retailers/:id/orders/1
   def update
     if @order.update(order_params)
-      render json: @order
+      render json: @order,root: "data", adapter: :json
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
-    render json: @orders
+    render json: @orders,root: "data", adapter: :json
   end
 
   # GET retailer|distributor/:id/orders_by_exit_date
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
-    render json: @orders
+    render json: @orders,root: "data", adapter: :json
   end
 
 

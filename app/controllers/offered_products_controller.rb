@@ -8,13 +8,13 @@ class OfferedProductsController < ApplicationController
   # GET /offered_products
   def index
 
-    render json: @offered_products, status: :ok
+    render json: @offered_products, status: :ok,root: "data", adapter: :json #, meta: pagination_dict(@offered_products)
   
   end
 
   # GET /offered_products/1
   def show
-    render json: @offered_product, status: :ok
+    render json: @offered_product, status: :ok, root: "data", adapter: :json
   end
 
   # POST /offered_products
@@ -22,7 +22,7 @@ class OfferedProductsController < ApplicationController
     @offered_product = OfferedProduct.new(offered_product_params)
 
     if @offered_product.save
-      render json: @offered_product, status: :created
+      render json: @offered_product, status: :created,root: "data", adapter: :json
     else
       render json: @offered_product.errors, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class OfferedProductsController < ApplicationController
   # PATCH/PUT /offered_products/1
   def update
     if @offered_product.update(offered_product_params)
-      render json: @offered_product, status: :ok
+      render json: @offered_product, status: :ok,root: "data", adapter: :json
     else
       render json: @offered_product.errors, status: :unprocessable_entity
     end
@@ -45,16 +45,17 @@ class OfferedProductsController < ApplicationController
   def offered_products_by_categories
     @offered_products = OfferedProduct.offered_products_by_categories(params[:category])
     
-    render json: @offered_products , status: :ok
+    render json: @offered_products , status: :ok,root: "data", adapter: :json
   end
 
   def suggest_to_retailer
     @offered_products= OfferedProduct.suggest_to_retailer(params[:retailer_id])
-    render json: @offered_products , status: :ok
+    render json: @offered_products , status: :ok,root: "data", adapter: :json
   end
 
   def offered_products_by_param_retailer
     @offered_products= OfferedProduct.offered_products_by_param_retailer(params[:name], params[:retailer_id])
+    render json: @offered_products , status: :ok,root: "data", adapter: :json
   end
   private
     # Use callbacks to share common setup or constraints between actions.

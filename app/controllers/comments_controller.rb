@@ -4,14 +4,14 @@ class CommentsController < ApplicationController
   # GET /comments
   def index
     @comments = Comment.comments_by_order(params[:order_id], params[:page], params[:per_page])
-    render json: @comments
+    render json: @comments,root: "data", adapter: :json#, meta: pagination_dict(@comments)
   end
 
   # GET /comments/1
   def show
     @comments = Comment.comments_by_order(params[:order_id], params[:page], params[:per_page])
     @comment = @comments.comment_by_id(params[:id])
-    render json: @comment
+    render json: @comment,root: "data", adapter: :json
   end
 
   # POST /comments
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      render json: @comment, status: :created
+      render json: @comment, status: :created,root: "data", adapter: :json
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      render json: @comment
+      render json: @comment,root: "data", adapter: :json
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

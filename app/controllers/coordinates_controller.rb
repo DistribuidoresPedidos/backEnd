@@ -4,14 +4,14 @@ class CoordinatesController < ApplicationController
   # GET /coordinates
   def index
     @coordinates = Coordinate.find_by_route_id(params[:route_id])
-    render json: @coordinates
+    render json: @coordinates,root: "data", adapter: :json
   end
 
   # GET /coordinates/1
   def show
     @coordinates = Coordinate.find_by_route_id(params[:route_id])
     @coordinate = @coordinates.coordinate_by_id(params[:id])
-    render json: @coordinate
+    render json: @coordinate,root: "data", adapter: :json
   end
 
   # POST /coordinates
@@ -19,7 +19,7 @@ class CoordinatesController < ApplicationController
     @coordinate = Coordinate.new(coordinate_params)
 
     if @coordinate.save
-      render json: @coordinate, status: :created, location: @coordinate
+      render json: @coordinate, status: :created,root: "data", adapter: :json
     else
       render json: @coordinate.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class CoordinatesController < ApplicationController
   # PATCH/PUT /coordinates/1
   def update
     if @coordinate.update(coordinate_params)
-      render json: @coordinate
+      render json: @coordinate,root: "data", adapter: :json
     else
       render json: @coordinate.errors, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class CoordinatesController < ApplicationController
 
   def coordinate_by_ordered_product
     @coordinates = Coordinate.find_by_ordered_product(params[:order__id])
-    render json: @coordinates
+    render json: @coordinates,root: "data", adapter: :json
   end
 
   private
