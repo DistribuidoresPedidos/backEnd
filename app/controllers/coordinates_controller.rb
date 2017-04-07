@@ -41,7 +41,7 @@ class CoordinatesController < ApplicationController
 
   def coordinate_by_ordered_product
     @coordinates = Coordinate.find_by_ordered_product(params[:order__id])
-    render json :@coordinates
+    render json: @coordinates
   end
 
   private
