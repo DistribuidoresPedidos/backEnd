@@ -29,7 +29,7 @@ Rails.application.routes.draw do
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
         end
-      end
+     
  
       resources :routes do  
         resources :orders 
