@@ -7,10 +7,10 @@ class ApplicationController < ActionController::API
 
   def configure_permitted_parameters
     if resource_class == Retailer 
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :email, :phoneNumber, :photo, :location])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :email, :phoneNumber, :photo, :latitude, :longitude])
       devise_parameter_sanitizer.permit(:account_update, keys: [:name, :description, :phoneNumber, :photo])
     elsif resource_class == Distributor
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phoneNumber, :photo, :email, :location])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phoneNumber, :photo, :email, :latitude, :longitude])
       devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phoneNumber, :photo])
     end
   end
