@@ -2,6 +2,11 @@ class Coordinate < ApplicationRecord
   belongs_to :route
   acts_as_geolocated
 
+  def self.coordinate_by_id(id)
+    includes(:route)
+    .find_by_id(id)
+  end
+
   def self.find_by_route_id(id)
   	includes(:route)
   	.where(coordinates: {
