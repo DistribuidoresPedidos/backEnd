@@ -12,6 +12,8 @@ Rails.application.routes.draw do
           resources :orders, except: [:create]
           resources :products 
           resources :offered_products
+          resources :routes 
+          resources :order_products
         end
       
    # end
@@ -25,11 +27,20 @@ Rails.application.routes.draw do
           get 'offered_products_by_retailer', to: 'offered_products#offered_products_by_param_retailer'
           get 'products_by_categories', to: 'products#products_by_categories'
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
+          get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer' 
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
         end
-     
-    
+      end
+ 
+  resources :routes do  
+    resources :orders 
+    resources :coordinates 
+  end  
+       
+  resources :offered_products do  
+    get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'  
+  end 
 
       resources :orders do
         resources :comments
