@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 #Retailer dont has routes for products , and retailer has routes for offered_products
- # namespace :api, defaults: {format: :json} do
-  #  namespace :v1 do
+  
+  scope '/api' do
+    scope '/v1' do
        mount_devise_token_auth_for 'Distributor', at: 'distri_path'
        as :distributor do
         resources :distributors, only: [:index, :show] do
@@ -32,9 +33,10 @@ Rails.application.routes.draw do
       end
     
 
-    resources :orders do
-      resources :comments
-    end
+      resources :orders do
+        resources :comments
+      end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    end
   end
 end
