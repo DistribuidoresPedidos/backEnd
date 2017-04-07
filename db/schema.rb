@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "title",        null: false
     t.text     "content",      null: false
     t.date     "dateComment"
-    t.integer  "calification"
     t.integer  "order_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "calification", null: false
     t.index ["order_id"], name: "index_comments_on_order_id", using: :btree
   end
 

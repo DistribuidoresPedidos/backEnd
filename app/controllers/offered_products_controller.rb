@@ -22,7 +22,7 @@ class OfferedProductsController < ApplicationController
     @offered_product = OfferedProduct.new(offered_product_params)
 
     if @offered_product.save
-      render json: @offered_product, status: :created, location: @offered_product
+      render json: @offered_product, status: :created
     else
       render json: @offered_product.errors, status: :unprocessable_entity
     end
