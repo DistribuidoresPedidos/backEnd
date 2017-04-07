@@ -1312,7 +1312,7 @@ Comment.create(title:'QMTXQxjEFk', content:'vNFOxqBTvAmWQCopXQTM', dateComment:'
 Comment.create(title:'nCnCuQUCbN', content:'LYDCGAQZATmyUTLOwJzP', dateComment:'zCnnzedIvJ', calification:'1', order_id:152)
 Comment.create(title:'VeENBuBvEG', content:'tOQTTDJDwyLYbnQohIJE', dateComment:'UWTBJjCJMZ', calification:'1', order_id:40)
 
-'''
+
 Retailer.all.each do |r|
 	img = rand(1...18).to_s + ".jpg"
 	r.photo = Rails.root.join("images/" + img).open
@@ -1329,4 +1329,4 @@ Product.all.each do |pr|
 	img = rand(1...18).to_s + ".jpg"
 	pr.photo = Rails.root.join("images/" + img).open
 	pr.save
-end'''
+end
