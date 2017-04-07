@@ -1,3 +1,4 @@
 class CoordinateSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :lat, :lng
+  belongs_to :route
 end
