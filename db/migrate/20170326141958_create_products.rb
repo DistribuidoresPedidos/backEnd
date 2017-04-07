@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.string :name, :null=> false 
       t.string :category, :null=> false 
       t.float :weight, :null=> false 
-      t.string :photo, :null=> false 
+      t.string :photo
 
       t.timestamps
     end

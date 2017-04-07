@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "name",                                     null: false
     t.string   "email",                                    null: false
     t.string   "phoneNumber",                              null: false
-    t.string   "photo",                                    null: false
+    t.string   "photo"
     t.float    "latitude"
     t.float    "longitude"
     t.json     "tokens"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "name",       null: false
     t.string   "category",   null: false
     t.float    "weight",     null: false
-    t.string   "photo",      null: false
+    t.string   "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
