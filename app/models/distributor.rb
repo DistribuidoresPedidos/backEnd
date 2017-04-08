@@ -16,7 +16,7 @@ class Distributor < ActiveRecord::Base
   mount_uploader :photo, PictureUploader
 
   def self.load_distributors(page=1, per_page=10)
-    includes(:products, :orders, offeredProducts:[:orderProducts], routes:[:coordinates])
+    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
     .paginate(:page => page, :per_page => per_page)
   end
 
