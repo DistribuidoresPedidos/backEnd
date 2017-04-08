@@ -1,9 +1,9 @@
 class OfferedProductsController < ApplicationController
   devise_token_auth_group :member, contains: [:distributor,:retailer]
   before_action :set_offered_product, only: [:index,:show, :update, :destroy]
-  before_action :authenticate_member!, only: [:index, :offered_products_by_categories ]
-  before_action :authenticate_destributor!, only:[:create, :update, :destroy]
-  before_action :authenticate_retailer!, only:[:suggest_to_retailer,:offered_products_by_param_retailer]
+  #before_action :authenticate_member!, only: [:index, :offered_products_by_categories ]
+  #before_action :authenticate_destributor!, only:[:create, :update, :destroy]
+  #before_action :authenticate_retailer!, only:[:suggest_to_retailer,:offered_products_by_param_retailer]
   #Pregunta cuando los metodos tienen intercerpción no vacia 
   # GET /offered_products
   def index
