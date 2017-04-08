@@ -13,12 +13,12 @@ class ProductsController < ApplicationController
       @products = Product.load_products(params[:page],params[:per_page])
     end
 
-    render json: @products, status: :ok,root: "data", adapter: :json
+    render json: @products, status: :ok,root: "data"
   end
 
   # GET distributors/:id/products/1
   def show
-    render json: @product, status: :ok,root: "data", adapter: :json
+    render json: @product, status: :ok,root: "data"
   end
 
   # POST /products
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: @product, status: :created,root: "data", adapter: :json
+      render json: @product, status: :created,root: "data"
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      render json: @product,root: "data", adapter: :json
+      render json: @product,root: "data"
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     else
      @products= products_by_categories(params[:category], params[:page],params[:per_page])
     end    
-    render json: @products,root: "data", adapter: :json
+    render json: @products,root: "data"
   
   end 
 
@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
     ids= set_ids
     @products= Product.products_by_ids(ids, @þage, @per_page)
 
-    render json: @products, status: :ok,root: "data", adapter: :json
+    render json: @products, status: :ok,root: "data"
   end
   private
     # Use callbacks to share common setup or constraints between actions.
