@@ -7,8 +7,8 @@ Rails.application.routes.draw do
         resources :distributors, only: [:index, :show] do
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
-          get 'products_by_categories', to: 'products#products_by_categories'
           get 'suggest_retailers', to: 'retailers#suggest_to_distributor_by_category'
+          get 'categories_by_distributor', to: 'products#categories_by_distributor'
           resources :orders, except: [:create]
           resources :products 
           resources :offered_products
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer' 
-          get 'products_by_categories', to: 'products#products_by_categories'
+          get 'categories_by_retailer', to: 'products#categories_by_retailer'
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
         end
@@ -45,15 +45,20 @@ Rails.application.routes.draw do
       end  
           
       resources :offered_products do
-        get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'  
+        collection do
+          get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'  
+        end
         get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'  
       end 
       
       resources :products do
-        get 'products_by_categories', to: 'products#products_by_categories'
-        get 'products_by_ids', to: 'products#products_by_ids'
-      end
-
+        collection do
+          get 'products_by_ids', to: 'products#products_by_ids'
+          get 'products_by_categories', to: 'products#products_by_categories'
+        end
+    end
+      
+      
       resources :orders do
         get 'order_products', to: 'order_products#order_products_by_order'
         resources :comments

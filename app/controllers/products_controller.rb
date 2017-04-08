@@ -13,12 +13,12 @@ class ProductsController < ApplicationController
       @products = Product.load_products(params[:page],params[:per_page])
     end
 
-    render json: @products, status: :ok,root: "data", adapter: :json
+    render json: @products, status: :ok,root: "data"
   end
 
   # GET distributors/:id/products/1
   def show
-    render json: @product, status: :ok,root: "data", adapter: :json
+    render json: @product, status: :ok,root: "data"
   end
 
   # POST /products
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: @product, status: :created,root: "data", adapter: :json
+      render json: @product, status: :created,root: "data"
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      render json: @product,root: "data", adapter: :json
+      render json: @product,root: "data"
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -47,23 +47,32 @@ class ProductsController < ApplicationController
   end
 
   def products_by_categories
-    
-    if params.has_key?(:distributor_id)
-      @products = Product.categories_by_distributor(params[:distributor_id],params[:page],params[:per_page])
-    elsif params.has_key?(:retailer_id)
-      @products = Product.categories_by_retailer(params[:retailer_id],params[:page],params[:per_page])
-    else
-     @products= products_by_categories(params[:category], params[:page],params[:per_page])
-    end    
-    render json: @products,root: "data", adapter: :json
+     
+     @products= Product.products_by_categories(params[:categories],params[:page],params[:per_page])
+
+      render json: @products,root: "data"
   
   end 
 
+ 
+
+
+  def categories_by_retailer
+      @category_products = Product.categories_by_retailer( params[:retailer_id],params[:page],params[:per_page])
+      render json: @category_products,root: "data"
+  end 
+   
+  
+  def categories_by_distributor
+      @category_products = Product.categories_by_distributor(params[:distributor_id],params[:page],params[:per_page])
+      render json: @category_products,root: "data"
+  end
+
   def products_by_ids
     ids= set_ids
-    @products= Product.products_by_ids(ids, @þage, @per_page)
+    @products= Product.products_by_ids(ids, params[:page],params[:per_page])
 
-    render json: @products, status: :ok,root: "data", adapter: :json
+    render json: @products, status: :ok,root: "data"
   end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,7 +84,7 @@ class ProductsController < ApplicationController
         @products= Product.products_by_ids(params[:id],params[:page],params[:per_page])
       end
     
-      @product= @products.product_by_id(params[:id])
+      @product= @products.product_by_id(params[:id],params[:page],params[:per_page])
       
     end
 
