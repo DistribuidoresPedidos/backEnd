@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :distributors, only: [:index, :show] do
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
+          get 'products_by_categories', to: 'products#products_by_categories'
           resources :orders, except: [:create]
           resources :products 
           resources :offered_products
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
           
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer' 
+          get 'products_by_categories', to: 'products#products_by_categories'
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
         end

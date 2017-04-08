@@ -1,3 +1,4 @@
+
 class Distributor < ActiveRecord::Base
   #relationships
   has_many :offeredProducts
