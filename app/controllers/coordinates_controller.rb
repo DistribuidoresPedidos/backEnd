@@ -3,13 +3,11 @@ class CoordinatesController < ApplicationController
 
   # GET /coordinates
   def index
-    @coordinates = Coordinate.find_by_route_id(params[:route_id])
     render json: @coordinates,root: "data", adapter: :json
   end
 
   # GET /coordinates/1
   def show
-    @coordinates = Coordinate.find_by_route_id(params[:route_id])
     @coordinate = @coordinates.coordinate_by_id(params[:id])
     render json: @coordinate,root: "data", adapter: :json
   end
@@ -47,7 +45,7 @@ class CoordinatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_coordinate
-      @coordinate = Coordinate.find(params[:id])
+      @coordinates = Coordinate.find_by_route_id(params[:route_id])
     end
 
     # Only allow a trusted parameter "white list" through.

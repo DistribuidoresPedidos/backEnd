@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
           get 'products_by_categories', to: 'products#products_by_categories'
+          get 'suggest_retailers', to: 'retailers#suggest_to_distributor_by_category'
           resources :orders, except: [:create]
           resources :products 
           resources :offered_products
@@ -19,6 +20,10 @@ Rails.application.routes.draw do
 
       
         resources :retailers, only: [:index, :show] do
+          collection do
+            get 'retailer_by_categories', to: 'retailers#retailer_by_category_products'
+          end
+
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
           
@@ -49,6 +54,7 @@ Rails.application.routes.draw do
       end
 
       resources :orders do
+        get 'order_products', to: 'order_products#order_products_by_order'
         resources :comments
       end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

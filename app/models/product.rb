@@ -10,16 +10,17 @@ class Product < ApplicationRecord
   #  default_scope {order('products.name ASC')}
 
     def self.load_products(page=1 , per_page=10)
-        includes(distributors:[:offeredProducts, :products, :routes])
+        includes(:offeredProducts, distributors:[:products, :routes])
         .paginate(:page => page, :per_page => per_page)        
     end
 #hace los mismo que el metodo load_products quitarlo. 
     def self.load_products_all()
-        includes(distributors:[:offeredProducts, :products, :routes])
+        includes(:offeredProducts, distributors:[:products, :routes])
+        
     end
 
     def self.product_by_id(id)
-        includes(distributors:[:offeredProducts, :products, :routes])
+        includes(:offeredProducts, distributors:[:products, :routes])
         .where(products:{
             id: id
         }
@@ -33,7 +34,7 @@ class Product < ApplicationRecord
     end
 
     def self.products_by_categories(categories, page=1, per_page=10)
-        includes(distributors:{routes: :coordinates})
+        includes(:offeredProducts, distributors:{routes: :coordinates})
         .where(products:{
             category: categories    
         }).paginate(:page => page, :per_page => per_page)       

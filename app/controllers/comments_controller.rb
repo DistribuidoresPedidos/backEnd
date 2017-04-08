@@ -1,15 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: [:show, :update, :destroy, :index]
 
   # GET /comments
   def index
-    @comments = Comment.comments_by_order(params[:order_id], params[:page], params[:per_page])
     render json: @comments,root: "data", adapter: :json#, meta: pagination_dict(@comments)
   end
 
   # GET /comments/1
   def show
-    @comments = Comment.comments_by_order(params[:order_id], params[:page], params[:per_page])
     @comment = @comments.comment_by_id(params[:id])
     render json: @comment,root: "data", adapter: :json
   end
@@ -42,7 +40,7 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comments = Comment.comments_by_order(params[:order_id], params[:page], params[:per_page])
     end
 
     # Only allow a trusted parameter "white list" through.

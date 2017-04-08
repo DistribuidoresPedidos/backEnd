@@ -1,28 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_order, only: [:show, :update, :destroy, :index]
 
   # GET /retailers/:id/orders
   def index
-    if params.has_key?(:retailer_id)
-      @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
-    elsif params.has_key?(:distributor_id)
-      @orders = Order.load_order_by_distributor(params[:distributor_id], params[:page], params[:per_page])
-    else
-      @orders = Order.load_orders(params[:page], params[:per_page])
-    end
     render json: @orders,root: "data", adapter: :json
   end
 
   # GET /retailers/:id/orders/1
   # GET /distributors/:id/orders/1  
   def show
-    if params.has_key?(:retailer_id)
-      @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
-    elsif params.has_key?(:distributor_id)
-      @orders = Order.load_order_by_distributor(params[:distributor_id], params[:page], params[:per_page])
-    else
-      @orders = Order.load_orders(params[:page], params[:per_page])
-    end
     @order = @orders.order_by_id(params[:id])
     render json: @order,root: "data", adapter: :json
   end
@@ -79,7 +65,16 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
+      if params.has_key?(:retailer_id)
+        @orders = Order.load_order_by_retailer(params[:retailer_id], params[:page], params[:per_page])
+      elsif params.has_key?(:distributor_id)
+        @orders = Order.load_order_by_distributor(params[:distributor_id], params[:page], params[:per_page])
+      else
+        @orders = Order.load_orders(params[:page], params[:per_page])
+      end
+      if params.has_key?(:id) 
+        @order = Order.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

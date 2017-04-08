@@ -10,7 +10,7 @@ class Route < ApplicationRecord
   end
 
   def self.route_by_id(id)
-    includes(:orders, :coordinates, distributor: [:routes] )
+    includes(:orders, :coordinates, :distributor )
     .find_by_id(id)
   end
   

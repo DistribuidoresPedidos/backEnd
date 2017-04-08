@@ -3,13 +3,11 @@ class RoutesController < ApplicationController
 
   # GET /routes
   def index
-    @routes = Route.route_by_distributor(params[:distributor_id])
     render json: @routes,root: "data", adapter: :json
   end
 
   # GET /routes/1
   def show
-    @routes = Route.route_by_distributor(params[:distributor_id])
     @route = @routes.route_by_id(params[:id])
     render json: @route,root: "data", adapter: :json
   end
@@ -42,7 +40,7 @@ class RoutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
-      @route = Route.route_by_id(params[:id])
+      @routes = Route.route_by_distributor(params[:distributor_id])
     end
 
     # Only allow a trusted parameter "white list" through.
