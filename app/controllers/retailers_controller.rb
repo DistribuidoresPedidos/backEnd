@@ -4,12 +4,23 @@ class RetailersController < ApplicationController
   # GET /retailers
   def index
     @retailers = Retailer.load_retailers(params[:page], params[:per_page])
-    render json: @retailers,root: "data", adapter: :json
+    render json: @retailers, root: "data", adapter: :json
   end
 
   # GET /retailers/1
   def show
-    render json: @retailer,root: "data", adapter: :json
+    render json: @retailer, root: "data", adapter: :json
+  end
+
+  # GET /distributors/:id/suggest_to_distributor_by_category
+  def suggest_to_distributor_by_category
+    @retailers = Retailer.suggest_to_distributor_by_category(params[:distributor_id], params[:page], params[:per_page])
+    render json: @retailers, root: "data", adapter: :json
+  end
+
+  def retailer_by_category_products
+    @retailers = Retailer.retailer_by_category_products(params[:categories], params[:page], params[:per_page])
+    render json: @retailers, root: "data", adapter: :json
   end
 
   private

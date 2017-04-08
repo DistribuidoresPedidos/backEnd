@@ -12,7 +12,7 @@ class Retailer < ActiveRecord::Base
   mount_uploader :photo, PictureUploader
 
   def self.load_retailers(page=1, per_page=10)
-    includes(:comments,orders:[:orderProducts])
+    includes(:comments, orders:[:orderProducts])
     .paginate(:page => page,:per_page => per_page)
   end
 
@@ -22,14 +22,14 @@ class Retailer < ActiveRecord::Base
   end
 
   def self.retailers_by_ids(ids)
-    includes(orders:[:orderProducts, :comments])
+    includes(:comments, orders:[:orderProducts])
     .where(retailers:{
       id: ids 
     })
   end
 
-  def self.retailers_by_distributor(distributor, page=1 , per_page=10 )
-    includes(orders: :route)
+  def self.retailers_by_distributor(distributor, page=1, per_page=10 )
+    includes(:comments, orders: [:route])
     .where(routes: {
       distributor_id: distributor
     }).paginate(:page => page,:per_page => per_page)
@@ -42,14 +42,14 @@ class Retailer < ActiveRecord::Base
     })
   end
   
-  def self.retailer_by_category_products(categories)
-    joins(orders: {offeredProducts: :product})
+  def self.retailer_by_category_products(categories, page=1, per_page=10)
+    includes(:comments, orders: {offeredProducts: :product})
     .where(products: {
       category: categories
-    })
+    }).paginate(:page => page,:per_page => per_page)
   end
 
-  def self.suggest_to_distributor(distributor, page=1 , per_page=10)
+  def self.suggest_to_distributor(distributor, page=1, per_page=10)
     s1 = Set.new
     possibleRetailers = Retailer.retailers_by_distributor(distributor)
     #routes = distributor.all_routes_id()
@@ -75,10 +75,10 @@ class Retailer < ActiveRecord::Base
     possible_retailers.each do |i|
       c = distributor_coordinates.within_radius(450, i.latitude, i.longitude)
       if c.size() > 0
-        s1.add(i)
+        s1.add(i.id)
       end
     end
-    s1.to_a
+    retailers_by_ids(s1.to_a).paginate(:page => page,:per_page => per_page)
   end
 
 

@@ -28,7 +28,7 @@ class Product < ApplicationRecord
     end
 
     def self.products_by_categories(categories, page=1, per_page=10)
-        includes(distributors:{routes: :coordinates})
+        includes(:offeredProducts, distributors:{routes: :coordinates})
         .where(products:{
             category: categories    
         }).paginate(:page => page, :per_page => per_page)       

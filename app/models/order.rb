@@ -12,15 +12,15 @@ class Order < ApplicationRecord
   scope :delivered, -> { where(state: 'delivered') }
 
   def self.load_orders(page=1, per_page=10)
-      includes(:orderProducts, :comments, :route, :retailer, )
-      .paginate(:page => page, :per_page => per_page)
+    includes(:orderProducts, :comments, :offeredProducts, :route, :retailer, )
+    .paginate(:page => page, :per_page => per_page)
   end 
   #retrieve a order
   def self.order_by_id(id)
-    includes(:orderProducts, :comments, :retailer, :route)
-      .find_by_id(id)
-    
+    includes(:orderProducts, :comments, :offeredProducts, :route, :retailer, )
+    .find_by_id(id)
   end
+  
   #retrieve all retailer's shop --Aks deliveres instead of self? 
   def self.load_order_by_retailer(retailer, page=1, per_page=10)
     load_orders(page, per_page)
