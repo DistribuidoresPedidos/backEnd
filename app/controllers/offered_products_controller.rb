@@ -5,11 +5,10 @@ class OfferedProductsController < ApplicationController
   #before_action :authenticate_destributor!, only:[:create, :update, :destroy]
   #before_action :authenticate_retailer!, only:[:suggest_to_retailer,:offered_products_by_param_retailer]
   #Pregunta cuando los metodos tienen intercerpción no vacia 
+  
   # GET /offered_products
   def index
-
     render json: @offered_products, status: :ok,root: "data", adapter: :json #, meta: pagination_dict(@offered_products)
-  
   end
 
   # GET /offered_products/1
@@ -45,18 +44,24 @@ class OfferedProductsController < ApplicationController
   def offered_products_by_categories
     @offered_products = OfferedProduct.offered_products_by_categories(params[:category])
     
-    render json: @offered_products , status: :ok,root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
 
   def suggest_to_retailer
     @offered_products= OfferedProduct.suggest_to_retailer(params[:retailer_id])
-    render json: @offered_products , status: :ok,root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
 
   def offered_products_by_param_retailer
     @offered_products= OfferedProduct.offered_products_by_param_retailer(params[:name], params[:retailer_id])
-    render json: @offered_products , status: :ok,root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
+
+  def offered_products_close_to_retailer
+    @offered_products= OfferedProduct.offered_products_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
+    render json: @offered_products , status: :ok, root: "data", adapter: :json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offered_product

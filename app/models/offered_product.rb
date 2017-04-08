@@ -66,6 +66,14 @@ end
 
   end
 
+  def self.offered_products_close_to_retailer(retailer_id, page=1, per_page=10)
+    retailer = Retailer.retailer_by_id(retailer_id)
+    joins(:product, distributor:{routes: :coordinates})
+    .merge(Coordinate.within_radius(400, retailer.latitude, retailer.longitude))
+    .paginate(:page => page, :per_page=> per_page)
+  end
+
+
   def self.offered_products_by_param_retailer(param, retailer_id, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.retailer_by_id(retailer_id)

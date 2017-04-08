@@ -29,7 +29,8 @@ Rails.application.routes.draw do
           
           get 'suggest_to_retailer', to: 'offered_products#suggest_to_retailer'
           get 'offered_products_by_retailer', to: 'offered_products#offered_products_by_param_retailer'
-          
+          get 'offered_products_close', to: 'offered_products#offered_products_close_to_retailer'
+
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer' 
           get 'products_by_categories', to: 'products#products_by_categories'
