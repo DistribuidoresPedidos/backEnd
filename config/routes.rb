@@ -44,14 +44,19 @@ Rails.application.routes.draw do
       end  
           
       resources :offered_products do
-        get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'  
+        collection do
+          get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'  
+        end
         get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'  
       end 
       
       resources :products do
-        get 'products_by_ids', to: 'products#products_by_ids'
-      end
-      get 'products_by_categories', to: 'products#products_by_categories'
+        collection do
+          get 'products_by_ids', to: 'products#products_by_ids'
+          get 'products_by_categories', to: 'products#products_by_categories'
+        end
+    end
+      
       
       resources :orders do
         get 'order_products', to: 'order_products#order_products_by_order'

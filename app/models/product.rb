@@ -28,8 +28,8 @@ class Product < ApplicationRecord
     end
 
     def self.products_by_categories(categories, page=1, per_page=10)
-        includes(:offeredProducts, distributors:{routes: :coordinates})
-        .where(products:{
+        
+        where(products:{
             category: categories    
         }).paginate(:page => page, :per_page => per_page)       
     end
@@ -54,10 +54,8 @@ class Product < ApplicationRecord
     end
 
     def self.categories_by_distributor(distributor_id,  page=1, per_page=10)
-        joins(:offeredProducts)
-            .where(offered_products:{
-                distributor_id: distributor_id
-            }).distinct.pluck(:category)
+        products_by_distributor(distributor_id, page, per_page)
+        .distinct.pluck(:category)
     end
 
     

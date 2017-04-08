@@ -14,8 +14,8 @@ class DistributorsController < ApplicationController
   end
 
   def distributors_by_retailer
-    @distributors= distributors_by_retailer(params[:retailer_id])
-    render json: @distributor, root: "data", adapter: :json
+    @distributors= Distributor.distributors_by_retailer(params[:retailer_id])
+    render json: @distributors, root: "data"
   end
   private
     # Use callbacks to share common setup or constraints between actions.

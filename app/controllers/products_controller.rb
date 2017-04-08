@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
 
   def products_by_categories
      
-     @products= products_by_categories(params[:category],params[:page],params[:per_page])
+     @products= Product.products_by_categories(params[:categories],params[:page],params[:per_page])
 
       render json: @products,root: "data"
   
