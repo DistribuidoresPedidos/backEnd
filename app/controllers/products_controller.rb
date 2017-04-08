@@ -47,21 +47,30 @@ class ProductsController < ApplicationController
   end
 
   def products_by_categories
-    
-    if params.has_key?(:distributor_id)
-      @products = Product.categories_by_distributor(params[:distributor_id],params[:page],params[:per_page])
-    elsif params.has_key?(:retailer_id)
-      @products = Product.categories_by_retailer(params[:retailer_id],params[:page],params[:per_page])
-    else
-     @products= products_by_categories(params[:category], params[:page],params[:per_page])
-    end    
-    render json: @products,root: "data"
+     
+     @products= products_by_categories(params[:category],params[:page],params[:per_page])
+
+      render json: @products,root: "data"
   
   end 
 
+ 
+
+
+  def categories_by_retailer
+      @category_products = Product.categories_by_retailer( params[:retailer_id],params[:page],params[:per_page])
+      render json: @category_products,root: "data"
+  end 
+   
+  
+  def categories_by_distributor
+      @category_products = Product.categories_by_distributor(params[:distributor_id],params[:page],params[:per_page])
+      render json: @category_products,root: "data"
+  end
+
   def products_by_ids
     ids= set_ids
-    @products= Product.products_by_ids(ids, @þage, @per_page)
+    @products= Product.products_by_ids(ids, params[:page],params[:per_page])
 
     render json: @products, status: :ok,root: "data"
   end
@@ -75,7 +84,7 @@ class ProductsController < ApplicationController
         @products= Product.products_by_ids(params[:id],params[:page],params[:per_page])
       end
     
-      @product= @products.product_by_id(params[:id])
+      @product= @products.product_by_id(params[:id],params[:page],params[:per_page])
       
     end
 

@@ -37,7 +37,7 @@ class Product < ApplicationRecord
     #load distributor's products
 
     def self.products_by_distributor(distributor, page=1 , per_page=10)
-        includes(:offeredProducts)
+        load_products(page, per_page)
         .where(offered_products:{
             distributor_id: distributor 
         }).paginate(:page => page, :per_page => per_page)       
