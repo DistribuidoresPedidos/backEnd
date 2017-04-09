@@ -5,12 +5,12 @@ class DistributorsController < ApplicationController
   # GET /distributors
   def index
     @distributors = Distributor.load_distributors(params[:page], params[:per_page])
-    render json: @distributors,root: "data", adapter: :json #, meta: pagination_dict(@distributors)
+    render json: @distributors, root: "data", adapter: :json #, meta: pagination_dict(@distributors)
   end
 
   # GET /distributors/1
   def show
-    render json: @distributor,root: "data", adapter: :json
+    render json: @distributor, root: "data", adapter: :json
   end
 
   def distributors_by_retailer
@@ -20,7 +20,7 @@ class DistributorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_distributor
-      @distributor = Distributor.find(params[:id])
+      @distributor = Distributor.distributor_by_id(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

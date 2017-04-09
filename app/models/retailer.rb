@@ -9,11 +9,14 @@ class Retailer < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true
+
+  scope :ordered_by_id, -> { order(id: :asc) }
+
   mount_uploader :photo, PictureUploader
 
   def self.load_retailers(page=1, per_page=10)
     includes(:comments, orders:[:orderProducts])
-    .paginate(:page => page,:per_page => per_page)
+    .ordered_by_id.paginate(:page => page,:per_page => per_page)
   end
 
   def self.retailer_by_id(id)

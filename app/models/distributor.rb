@@ -13,11 +13,13 @@ class Distributor < ActiveRecord::Base
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true 
 
+  scope :ordered_by_id, -> { order(id: :asc) }
+
   mount_uploader :photo, PictureUploader
 
   def self.load_distributors(page=1, per_page=10)
     includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
-    .paginate(:page => page, :per_page => per_page)
+    .ordered_by_id.paginate(:page => page, :per_page => per_page)
   end
 
   def self.distributor_by_id(id, page=1, per_page=10)
