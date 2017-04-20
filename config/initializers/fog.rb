@@ -1,8 +1,8 @@
 CarrierWave.configure do |config|
   config.fog_credentials = {
 	:provider               => 'AWS',
-  	:aws_access_key_id      => "AKIAIENNIAGVEJE64SNA",
-  	:aws_secret_access_key  => "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",
+  	:aws_access_key_id      => AWS_ACCESS_KEY,
+  	:aws_secret_access_key  => AWS_SECRET_KEY,
     :region                 => 'us-west-1'  # optional, defaults to 'us-east-1'
   }
   config.fog_directory  = 'dealersapiun-is-2017-2'                     # required
