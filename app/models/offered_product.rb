@@ -42,7 +42,9 @@ end
         category: categories    
     }).paginate(:page => page, :per_page=> per_page)
   end
-
+  def self.most_selled()
+      includes(:orderProducts).group(:id).sum(:quantity)
+  end
   def self.suggest_to_retailer(retailer_id, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.find_by_id(retailer_id)

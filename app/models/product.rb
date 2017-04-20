@@ -58,6 +58,5 @@ class Product < ApplicationRecord
         .distinct.pluck(:category)
     end
 
-    
 
 end

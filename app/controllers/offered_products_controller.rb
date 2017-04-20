@@ -61,7 +61,11 @@ class OfferedProductsController < ApplicationController
     @offered_products= OfferedProduct.offered_products_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
     render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
-
+  
+  def offered_products_most_selled
+    @offered_products= OfferedProduct.most_selled()
+    render json: @offered_products, status: :ok, root: "data"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offered_product

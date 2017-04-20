@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       resources :offered_products do
         collection do
           get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'  
+          get 'offered_products_most_selled', to: 'offered_products#offered_products_most_selled'
         end
         get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'  
       end 
