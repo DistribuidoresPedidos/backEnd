@@ -5,4 +5,5 @@ class OfferedProductSerializer < ActiveModel::Serializer
   has_many :orderProducts
   has_many :orders, :through => :orderProducts
   
+
 end
