@@ -4,5 +4,5 @@ class DistributorSerializer < ActiveModel::Serializer
   has_many :products, :through => :offeredProducts
   has_many :routes
   has_many :orders, :through => :routes
-  
+
 end

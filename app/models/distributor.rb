@@ -18,7 +18,7 @@ class Distributor < ActiveRecord::Base
   mount_uploader :photo, PictureUploader
 
   reverse_geocoded_by :latitude, :longitude, :address => :location
-  after_validation :reverse_geocode  # auto-fetch address
+  after_validation :reverse_geocode, if: ->(obj){ obj.latitude.present? and obj.latitude_changed? }
 
   def self.load_distributors(page=1, per_page=10)
     includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
