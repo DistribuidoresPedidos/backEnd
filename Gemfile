@@ -41,6 +41,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'haversine'
 gem 'activerecord-postgres-earthdistance'
 
+gem 'geocoder'
+
 gem 'carrierwave', '~> 1.0'
 gem "fog"
 
