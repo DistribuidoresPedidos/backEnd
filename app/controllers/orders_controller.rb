@@ -61,6 +61,24 @@ class OrdersController < ApplicationController
     render json: @orders,root: "data", adapter: :json
   end
 
+  #POST /retailers/:id/make_order
+  def make_order
+    @order = Order.new(order_params)
+    @order.state = 'new'
+    if @order.save
+      #render json: @order, status: :created,root: "data", adapter: :json
+      @products = params[:products]
+      @products.each do |product|
+        @offeredProduct = OfferedProduct.find_by_id(product['offeredProduct'])
+        @quantity = product['quantity']
+        @order_product = OrderProduct.create(offered_product: @offeredProduct, order: @order, quantity: @quantity, price: @offeredProduct.price * @quantity)
+      end
+    render json: @order, status: :created,root: "data", adapter: :json
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
