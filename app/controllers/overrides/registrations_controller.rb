@@ -61,7 +61,7 @@ module Overrides
                 @token: SecureRandom.urlsafe_base64(nil, false)
 
                 @resource1.tokens[@client_id]={
-                  token: BCryp::Passworld.create(@token),
+                  token: BCryp::Passworld.create(@token)
                   #expiry
                 }
 
