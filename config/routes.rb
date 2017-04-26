@@ -61,6 +61,9 @@ Rails.application.routes.draw do
       
       
       resources :orders do
+        collection do
+          post 'make_order', to: 'orders#make_order'
+        end
         get 'order_products', to: 'order_products#order_products_by_order'
         resources :comments
       end
