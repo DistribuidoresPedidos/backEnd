@@ -3,14 +3,14 @@ module Overrides
     devise_token_auth_group :member, contains: [:retailer, :distributor]
 
     def create
-      @resource1 = resource_class.new(sign_up_params)
-      @resource1.provider ="email"
+      @resource = resource_class.new(sign_up_params)
+      @resource.provider ="email"
 
       #validation
       if resource_class.case_insensitive_keys.include?(:email)
-        @resource1.email= sign_up_params[:email].try :downcase
+        @resource.email= sign_up_params[:email].try :downcase
       else
-        @resource1.email= sign_up_params[:email]
+        @resource.email= sign_up_params[:email]
       end
 
       # give redirect value from params priority
@@ -38,11 +38,11 @@ module Overrides
         resource_class.set_callback("create", :after, :send_on_create_confirmation_instructions)
         resource_class.skip_callback("create", :after, :send_on_create_confirmation_instructions)
 
-        if @resource1.save
-          yield @resource1 if block_given?
-            unless @resource1.confirmed?
+        if @resource.save
+          yield @resource if block_given?
+            unless @resource.confirmed?
                 #user will require email authentication
-                @resource1.send_confirmation_instructions({
+                @resource.send_confirmation_instructions({
                   client_config: params[:config_name],
                   redirect_url: @redirect_url
                 })
@@ -50,24 +50,24 @@ module Overrides
               @client_id= SecureRandom.urlsafe_base64(nil, false)
               @token= SecureRandom.urlsafe_base64(nil, false)
 
-              @resource1.tokens[@client_id]={
+              @resource.tokens[@client_id]={
                 token: @token
               }
 
-              @resource1.valid?
-              puts @resource1.errors.full_messages
+              @resource.valid?
+              puts @resource.errors.full_messages
               update_auth_header
             end
 
             render_create_success
 
           else
-            clean_up_passwords @resource1
+            clean_up_passwords @resource
             render_create_error
           end
 
         rescue ActiveRecord::RecordNotUnique
-          clean_up_passwords @resource1
+          clean_up_passwords @resource
           render_create_error_email_already_exists
         end
       end
