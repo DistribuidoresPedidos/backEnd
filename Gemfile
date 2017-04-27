@@ -17,7 +17,7 @@ gem 'puma', '~> 3.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+#gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -34,9 +34,9 @@ gem 'will_paginate', '~> 3.1.0'
 #authentication
 gem 'devise_token_auth'
 gem 'devise'
-#autenticacion con face, github 
+#autenticacion con face, github
 gem 'omniauth'
-#diferentes sefmentos de red cross-domain 
+#diferentes sefmentos de red cross-domain
 gem 'rack-cors', :require => 'rack/cors'
 gem 'haversine'
 gem 'activerecord-postgres-earthdistance'
@@ -46,7 +46,7 @@ gem 'geocoder'
 gem 'carrierwave', '~> 1.0'
 gem "fog"
 
-#luego correr el comando rails g devise_token_auth:install [USER_CLASS] [MOUNT_PATH] User and Path 
+#luego correr el comando rails g devise_token_auth:install [USER_CLASS] [MOUNT_PATH] User and Path
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

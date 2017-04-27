@@ -1,5 +1,6 @@
 
 class Distributor < ActiveRecord::Base
+
   #relationships
   has_many :offeredProducts
   has_many :products, :through => :offeredProducts
@@ -7,11 +8,11 @@ class Distributor < ActiveRecord::Base
   has_many :orders, :through => :routes
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
+          :recoverable, :rememberable,  :validatable,
+          :omniauthable
   include DeviseTokenAuth::Concerns::User
   validates :name, :email, :phoneNumber,  presence: true
-  validates :email, :phoneNumber, uniqueness: true 
+  validates :email, :phoneNumber, uniqueness: true
 
   scope :ordered_by_id, -> { order(id: :asc) }
 
@@ -19,6 +20,7 @@ class Distributor < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude, :address => :location
   after_validation :reverse_geocode, if: ->(obj){ obj.latitude.present? and obj.latitude_changed? }
+
 
   def self.load_distributors(page=1, per_page=10)
     includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
@@ -33,7 +35,7 @@ class Distributor < ActiveRecord::Base
   def self.distributors_by_ids(ids, page = 1, per_page = 10)
     load_distributors(page, per_page)
     .where(distributors:{
-      id: ids 
+      id: ids
     })
   end
 

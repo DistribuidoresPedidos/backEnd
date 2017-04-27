@@ -1,11 +1,11 @@
 require 'set'
 class Retailer < ActiveRecord::Base
-  has_many :orders 
+  has_many :orders
   has_many :comments, :through => :orders
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
+          :recoverable, :rememberable, :validatable,
+           :omniauthable
   include DeviseTokenAuth::Concerns::User
   validates :name, :email, :phoneNumber,  presence: true
   validates :email, :phoneNumber, uniqueness: true
@@ -13,6 +13,7 @@ class Retailer < ActiveRecord::Base
   scope :ordered_by_id, -> { order(id: :asc) }
 
   mount_uploader :photo, PictureUploader
+
 
   def self.load_retailers(page=1, per_page=10)
     includes(:comments, orders:[:orderProducts])
@@ -27,7 +28,7 @@ class Retailer < ActiveRecord::Base
   def self.retailers_by_ids(ids)
     includes(:comments, orders:[:orderProducts])
     .where(retailers:{
-      id: ids 
+      id: ids
     })
   end
 
@@ -44,7 +45,7 @@ class Retailer < ActiveRecord::Base
       category: category
     })
   end
-  
+
   def self.retailer_by_category_products(categories, page=1, per_page=10)
     includes(:comments, orders: {offeredProducts: :product})
     .where(products: {
@@ -56,14 +57,14 @@ class Retailer < ActiveRecord::Base
     s1 = Set.new
     possibleRetailers = Retailer.retailers_by_distributor(distributor)
     #routes = distributor.all_routes_id()
-    routes = Route.route_by_distributor(distributor, page, per_page)  
+    routes = Route.route_by_distributor(distributor, page, per_page)
     routes.each do |i|
-      possibleRetailers.each do |j| 
+      possibleRetailers.each do |j|
         c = Coordinate.within_radius(1000000, j.latitude, j.longitude).find_by_route_id(i.id)
         if c
           s1.add(j.id)
         end
-      end 
+      end
     end
 
     Retailer.retailers_by_ids(s1.to_a)
@@ -86,5 +87,3 @@ class Retailer < ActiveRecord::Base
 
 
 end
-
-
