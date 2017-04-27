@@ -57,6 +57,12 @@ class OfferedProductsController < ApplicationController
     render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
 
+  def offered_products_by_param_retailer_match
+    @offered_products= OfferedProduct.offered_products_by_param_retailer_match(params[:q], params[:retailer_id], params[:page], params[:per_page])
+    render json: @offered_products , status: :ok, root: "data", adapter: :json
+  end
+
+
   def offered_products_close_to_retailer
     @offered_products= OfferedProduct.offered_products_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
     @order_params = params[:orderBy].split(',')

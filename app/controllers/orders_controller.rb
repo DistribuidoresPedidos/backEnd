@@ -65,14 +65,18 @@ class OrdersController < ApplicationController
   def make_order
     @order = Order.new(order_params)
     @order.state = 'new'
+    @order.totalPrice = 0
     if @order.save
       #render json: @order, status: :created,root: "data", adapter: :json
       @products = params[:products]
       @products.each do |product|
         @offeredProduct = OfferedProduct.find_by_id(product['offeredProduct'])
         @quantity = product['quantity']
-        @order_product = OrderProduct.create(offered_product: @offeredProduct, order: @order, quantity: @quantity, price: @offeredProduct.price * @quantity)
+        @subtotal = @offeredProduct.price * @quantity
+        @order_product = OrderProduct.create(offered_product: @offeredProduct, order: @order, quantity: @quantity, price: @subtotal)
+        @order.totalPrice += @subtotal
       end
+      @order.save
     render json: @order, status: :created,root: "data", adapter: :json
     else
       render json: @order.errors, status: :unprocessable_entity
