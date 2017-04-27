@@ -59,6 +59,21 @@ class OfferedProductsController < ApplicationController
 
   def offered_products_close_to_retailer
     @offered_products= OfferedProduct.offered_products_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
+    @order_params = params[:orderBy].split(',')
+    @order_params.each do |param|
+      case param
+      when 'price'
+        @offered_products = @offered_products.order_by_price
+      when '-price'
+        @offered_products = @offered_products.order_by_price('desc')
+      when 'id'
+        @offered_products = @offered_products.order_by_id
+      when '-id'  
+        @offered_products = @offered_products.order_by_id('desc')
+      else
+        @offered_products = @offered_products.order_by_id
+      end
+    end
     render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
   

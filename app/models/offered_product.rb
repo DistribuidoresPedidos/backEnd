@@ -5,6 +5,9 @@ class OfferedProduct < ApplicationRecord
   has_many :orders, :through => :orderProducts
   validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
 
+  scope :order_by_id, -> (ord) {order("offered_products.id #{ord}")}
+  scope :order_by_price, -> (ord) {order("offered_products.price #{ord}")}
+
 #Solo returna los que han sido ordenados , más no todos los offeredProducts
   def self.load_offered_products(page = 1, per_page = 10)
   	includes( :product,:orders, :orderProducts, distributor:[:routes])
@@ -84,7 +87,7 @@ end
     possible_offered_product = offered_products_by_param(param)
     possible_offered_product.each do |i|
       coordinates = Coordinate.find_by_offered_product(i)
-      c = coordinates.within_radius(400, retailer.latitude, retailer.longitude)
+      c = coordinates.within_radius(20000, retailer.latitude, retailer.longitude)
       if c.size() > 0
         s1.add(i)
       end
