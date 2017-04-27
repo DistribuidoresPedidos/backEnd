@@ -72,11 +72,11 @@ Rails.application.routes.draw do
   end
   mount_devise_token_auth_for 'Distributor', at: 'api/v1/distri_path', skip: [:omniauth_callbacks] , controllers:{
     registrations: 'overrides/registrations',
-    sessions:      'overrides/sessions'
+
   }
 
   mount_devise_token_auth_for 'Retailer', at: 'api/v1/retai_path',  skip: [:omniauth_callbacks] , controllers:{
     registrations: 'overrides/registrations',
-    sessions:      'overrides/sessions'
+  
   }
 end
