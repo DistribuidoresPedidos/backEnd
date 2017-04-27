@@ -51,7 +51,7 @@ module Overrides
               @token= SecureRandom.urlsafe_base64(nil, false)
 
               @resource.tokens[@client_id]={
-                token: @token
+                token: BCrypt::Password.create(@token)
               }
 
               @resource.valid?
