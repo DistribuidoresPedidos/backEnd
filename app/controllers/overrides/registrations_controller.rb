@@ -6,8 +6,6 @@ module Overrides
       @resource1 = resource_class.new(sign_up_params)
       @resource1.provider ="email"
 
-      type= @resource1.is_a?(Distributor) ? "distributor" : "retailer"
-      #what kind of user
       #validation
       if resource_class.case_insensitive_keys.include?(:email)
         @resource1.email= sign_up_params[:email].try :downcase
