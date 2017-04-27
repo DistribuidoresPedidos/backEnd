@@ -65,12 +65,16 @@ end
     s1.to_a
   end
 
+  def self.offered_products_by_param_match(param)
+    joins(:product, distributor:{routes: :coordinates})
+    .where("products.name LIKE ? OR products.category LIKE ?", "%#{param}%", "%#{param}%")
+  end
+
   def self.offered_products_by_param(param, page=1, per_page=10)
     includes(:product, distributor:{routes: :coordinates})
     .where(products:{
-      name: param  
+      name: param
     })
-
   end
 
   def self.offered_products_close_to_retailer(retailer_id, page=1, per_page=10)
@@ -93,6 +97,20 @@ end
       end
     end
     s1.to_a
+  end
+
+  def self.offered_products_by_param_retailer_match(param, retailer_id, page=1, per_page=10)
+    s1 = Set.new
+    retailer = Retailer.retailer_by_id(retailer_id)
+    possible_offered_product = offered_products_by_param_match(param)
+    possible_offered_product.each do |i|
+      coordinates = Coordinate.find_by_offered_product(i)
+      c = coordinates.within_radius(20000, retailer.latitude, retailer.longitude)
+      if c.size() > 0
+        s1.add(i)
+      end
+    end
+    s1.to_a.paginate(:page => page, :per_page=> per_page)
   end
   
 end
