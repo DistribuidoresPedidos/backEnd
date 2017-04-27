@@ -82,5 +82,9 @@ class Order < ApplicationRecord
     })
   end
 
+  def self.total_price(id)
+    includes(:orderProducts).sum('order_products.price')
+  end
+
 
 end 
