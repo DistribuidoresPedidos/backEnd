@@ -62,4 +62,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-ruby "2.4.0"
+
+#Limitate amount of petitions
+gem 'rack', '~> 2.0', '>= 2.0.1'
+gem 'rack-throttle', '~> 0.5.0'
