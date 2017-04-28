@@ -42,11 +42,11 @@ module DealersApi
         origins '*'
         resource '*',
           :headers => :any,
-          :expose => :any,
+          :expose =>   ['access-token', 'expiry', 'token-type', 'uid', 'client'],
           :methods => [:get,:post,:options,:delete,:put,:patch,:head]
       end
     end
-    
+
     config.middleware.use Rack::Deflater
     config.autoload_paths += %W(#{config.root}/lib)
     config.middleware.use ActionDispatch::Cookies
@@ -54,7 +54,3 @@ module DealersApi
   end
 
 end
-
-
-
-
