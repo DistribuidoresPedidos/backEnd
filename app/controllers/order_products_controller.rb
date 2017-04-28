@@ -25,7 +25,7 @@ class OrderProductsController < ApplicationController
   end
 
   def order_product_by_route
-    @:order_products = OrderProduct.orderProduct_by_route(params[:route_id])
+    @order_products = OrderProduct.orderProduct_by_route(params[:route_id])
     @order_product = @order_products.
 
   # PATCH/PUT /order_products/1
