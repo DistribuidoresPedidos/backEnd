@@ -15,6 +15,8 @@ require 'fog/aws'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+# config/application.rb
+require 'rack/throttle'
 
 module DealersApi
   class Application < Rails::Application
@@ -26,6 +28,15 @@ module DealersApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    #HTML Requests per minute
+    config.middleware.use Rack::Throttle::Minute, :max => 5
+    #HTML Requests per hour
+    config.middleware.use Rack::Throttle::Hourly,   :max => 100
+    #HTML daily Requests
+    config.middleware.use Rack::Throttle::Daily, :max => 2000
+    #HTML Interval between Requests
+    #config.middleware.use Rack::Throttle::Interval, :min => 3.0
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
@@ -41,5 +52,9 @@ module DealersApi
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
   end
+
 end
+
+
+
 
