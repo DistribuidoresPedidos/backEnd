@@ -29,7 +29,7 @@ module DealersApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     #HTML Requests per minute
-    config.middleware.use Rack::Throttle::Minute, :max => 5
+    config.middleware.use Rack::Throttle::Minute, :max => 50
     #HTML Requests per hour
     config.middleware.use Rack::Throttle::Hourly,   :max => 100
     #HTML daily Requests
