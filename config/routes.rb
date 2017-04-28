@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
           get 'suggest_retailers', to: 'retailers#suggest_to_distributor_by_category'
           get 'categories_by_distributor', to: 'products#categories_by_distributor'
+          get 'comments', to: 'comments#comments_by_distributor'
           resources :orders, except: [:create]
           resources :products
           resources :offered_products

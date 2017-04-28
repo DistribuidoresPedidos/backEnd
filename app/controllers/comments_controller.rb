@@ -37,6 +37,12 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
+  #GET /distributors/:id/comments
+  def comments_by_distributor
+    @comments = Comment.comments_by_distributor(params[:distributor_id], params[:page], params[:per_page])
+    render json: @comments, root: "data", adapter: :json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
