@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         resources :retailers, only: [:index, :show] do
           collection do
             get 'retailer_by_categories', to: 'retailers#retailer_by_category_products'
+            get 'retailer_by_param', to: 'retailers#retailer_by_param'
           end
 
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
         collection do
           get 'offered_products_by_categories', to: 'offered_products#offered_products_by_categories'
           get 'offered_products_most_selled', to: 'offered_products#offered_products_most_selled'
+          get 'offered_products_by_param', to: 'offered_products#offered_products_by_param'
         end
         get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'
       end

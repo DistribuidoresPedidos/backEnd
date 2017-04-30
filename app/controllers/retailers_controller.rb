@@ -23,6 +23,15 @@ class RetailersController < ApplicationController
     render json: @retailers, root: "data", each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
   end
 
+  def retailer_by_param
+    @retailer_by_params= params[:select_retailer].split(',')
+
+    select_colums= @retailer_by_params.map(&:to_sym)
+
+    @select= Retailer.retailer_by_param(select_colums)
+    render json: @select, status: :ok, root: "data",  each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_retailer

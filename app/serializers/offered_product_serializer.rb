@@ -20,4 +20,11 @@ class OfferedProductSerializer < ActiveModel::Serializer
     render?(instance_options[:render_attribute].split(","),"offered_product.price","price")
   end
 
+  def render_product_id?
+    render?(instance_options[:render_attribute].split(","),"offered_product.product_id","product_id")
+  end
+
+  def render_distributor_id?
+    render?(instance_options[:render_attribute].split(","),"offered_product.distributor_id","distributor_id")
+  end
 end

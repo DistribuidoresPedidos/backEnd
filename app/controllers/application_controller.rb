@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   #devise es celoso parametros fuertes 'strong params' adicionalmente vamos a pasar mas llaves
   #sainitizer no deja modificar
-  
+
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :configure_permitted_parameters, if: :devise_controller?
 

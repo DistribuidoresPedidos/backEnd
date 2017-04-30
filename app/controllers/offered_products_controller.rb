@@ -62,7 +62,16 @@ class OfferedProductsController < ApplicationController
     render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
+  def offered_products_by_param
+    @offered_products_by_params= params[:select_offered_product].split(',')
+    @offered_products_by_params.push("product_id")
+    @offered_products_by_params.push("distributor_id")
+    select_colums= @offered_products_by_params.map(&:to_sym)
 
+    @select= OfferedProduct.offered_products_by_select(select_colums)
+    render json: @select, status: :ok, root: "data",  each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"
+
+  end
   def offered_products_close_to_retailer
     @offered_products= OfferedProduct.offered_products_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
     @order_params = params[:orderBy].split(',')

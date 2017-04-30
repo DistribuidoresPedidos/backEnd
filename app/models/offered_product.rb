@@ -78,7 +78,7 @@ end
   end
   def self.offered_products_by_select(params, page=1, per_page=10)
     load_offered_products(page, per_page)
-    .select(params.map &:to_sym)
+    .select(params)
   end
 
   def self.offered_products_close_to_retailer(retailer_id, page=1, per_page=10)

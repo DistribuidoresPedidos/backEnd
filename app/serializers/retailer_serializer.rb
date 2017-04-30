@@ -12,7 +12,7 @@ class RetailerSerializer < ActiveModel::Serializer
   attribute :photo, if: :render_photo?
   attribute :latitude, if: :render_latitude?
   attribute :longitude, if: :render_longitude?
-  
+
   has_many :orders
   has_many :comments, :through => :orders
 

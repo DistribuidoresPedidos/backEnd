@@ -22,6 +22,7 @@ class Retailer < ActiveRecord::Base
     .ordered_by_id.paginate(:page => page,:per_page => per_page)
   end
 
+
   def self.retailer_by_id(id)
     includes(orders:[:orderProducts, :comments])
     .find_by_id(id)
@@ -55,6 +56,10 @@ class Retailer < ActiveRecord::Base
     }).paginate(:page => page,:per_page => per_page)
   end
 
+  def self.retailer_by_param(params, page=1, per_page=10)
+    load_retailers(page, per_page)
+    .select(params.map &:to_sym)
+  end
   def self.suggest_to_distributor(distributor, page=1, per_page=10)
     s1 = Set.new
     possibleRetailers = Retailer.retailers_by_distributor(distributor)

@@ -4,6 +4,6 @@ class OfferedProductSumSerializer < ActiveModel::Serializer
   belongs_to :distributor
   has_many :orderProducts
   has_many :orders, :through => :orderProducts
-  
+
 
 end
