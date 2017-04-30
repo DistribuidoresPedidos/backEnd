@@ -4,7 +4,7 @@ class RetailersController < ApplicationController
   # GET /retailers
   def index
     @retailers = Retailer.load_retailers(params[:page], params[:per_page])
-    render json: @retailers, root: "data", adapter: :json
+    render json: @retailers, root: "data", each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
   end
 
   # GET /retailers/1

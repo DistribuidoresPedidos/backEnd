@@ -34,15 +34,15 @@ class DeviseTokenAuthCreateRetailers < ActiveRecord::Migration[5.0]
       # t.datetime :locked_at
 
       ## User Info
-   
-      t.string :name , :null=> false 
+
+      t.string :name , :null=> false
       t.text :description
-      t.string :email , :null=> false 
+      t.string :email , :null=> false
       t.string :phoneNumber, :null=> false , :unique => true
       t.string :photo
       t.float :latitude
       t.float :longitude
-      t.string :location
+    #  t.string :location
       ## Tokens
       t.json :tokens
 

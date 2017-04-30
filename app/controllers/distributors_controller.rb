@@ -5,17 +5,17 @@ class DistributorsController < ApplicationController
   # GET /distributors
   def index
     @distributors = Distributor.load_distributors(params[:page], params[:per_page])
-    render json: @distributors, root: "data", adapter: :json,render_attribute: params[:select_distributor] || "all" #, meta: pagination_dict(@distributors)
+    render json: @distributors, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all" #, meta: pagination_dict(@distributors)
   end
 
   # GET /distributors/1
   def show
-    render json: @distributor, root: "data", adapter: :json,render_attribute: params[:select_distributor] || "all"
+    render json: @distributor, root: "data",  each_serializer: DistributorSerializer,render_attribute: params[:select_distributor] || "all"
   end
 
   def distributors_by_retailer
     @distributors= Distributor.distributors_by_retailer(params[:retailer_id])
-    render json: @distributors, root: "data",render_attribute: params[:select_distributor] || "all"
+    render json: @distributors, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
   end
 
   def distributor_by_param
@@ -24,7 +24,7 @@ class DistributorsController < ApplicationController
     select_colums= @distributor_by_params.map(&:to_sym)
 
     @select= Distributor.distributor_by_param(select_colums)
-    render json: @select, status: :ok, root: "data", render_attribute: params[:select_distributor] || "all"
+    render json: @select, status: :ok, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
 
   end
   private

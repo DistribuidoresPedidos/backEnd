@@ -8,12 +8,12 @@ class OfferedProductsController < ApplicationController
 
   # GET /offered_products
   def index
-    render json: @offered_products, status: :ok,root: "data", adapter: :json #, meta: pagination_dict(@offered_products)
+    render json: @offered_products, status: :ok,root: "data", each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#, meta: pagination_dict(@offered_products)
   end
 
   # GET /offered_products/1
   def show
-    render json: @offered_product, status: :ok, root: "data", adapter: :json
+    render json: @offered_product, status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
   # POST /offered_products
@@ -21,7 +21,7 @@ class OfferedProductsController < ApplicationController
     @offered_product = OfferedProduct.new(offered_product_params)
 
     if @offered_product.save
-      render json: @offered_product, status: :created,root: "data", adapter: :json
+      render json: @offered_product, status: :created,root: "data",serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
     else
       render json: @offered_product.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class OfferedProductsController < ApplicationController
   # PATCH/PUT /offered_products/1
   def update
     if @offered_product.update(offered_product_params)
-      render json: @offered_product, status: :ok,root: "data", adapter: :json
+      render json: @offered_product, status: :ok,root: "data", serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
     else
       render json: @offered_product.errors, status: :unprocessable_entity
     end
@@ -49,17 +49,17 @@ class OfferedProductsController < ApplicationController
 
   def suggest_to_retailer
     @offered_products= OfferedProduct.suggest_to_retailer(params[:retailer_id])
-    render json: @offered_products , status: :ok, root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
   def offered_products_by_param_retailer
     @offered_products= OfferedProduct.offered_products_by_param_retailer(params[:name], params[:retailer_id])
-    render json: @offered_products , status: :ok, root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
   def offered_products_by_param_retailer_match
     @offered_products= OfferedProduct.offered_products_by_param_retailer_match(params[:q], params[:retailer_id], params[:page], params[:per_page])
-    render json: @offered_products , status: :ok, root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
 
@@ -80,12 +80,12 @@ class OfferedProductsController < ApplicationController
         @offered_products = @offered_products.order_by_id
       end
     end
-    render json: @offered_products , status: :ok, root: "data", adapter: :json
+    render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
   def offered_products_most_selled
     @offered_products= OfferedProduct.most_selled(params[:top])
-    render json: @offered_products, :each_serializer => OfferedProductSumSerializer, status: :ok, root: "data", adapter: :json
+    render json: @offered_products, :each_serializer => OfferedProductSumSerializer, status: :ok, root: "data", adapter: :json,  render_attribute: params[:select_offered_product] || "all"
   end
 
   private
