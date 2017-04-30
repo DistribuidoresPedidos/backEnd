@@ -4,8 +4,8 @@ class OfferedProductsController < ApplicationController
   #before_action :authenticate_member!, only: [:index, :offered_products_by_categories ]
   #before_action :authenticate_destributor!, only:[:create, :update, :destroy]
   #before_action :authenticate_retailer!, only:[:suggest_to_retailer,:offered_products_by_param_retailer]
-  #Pregunta cuando los metodos tienen intercerpción no vacia 
-  
+  #Pregunta cuando los metodos tienen intercerpción no vacia
+
   # GET /offered_products
   def index
     render json: @offered_products, status: :ok,root: "data", adapter: :json #, meta: pagination_dict(@offered_products)
@@ -43,7 +43,7 @@ class OfferedProductsController < ApplicationController
 
   def offered_products_by_categories
     @offered_products = OfferedProduct.offered_products_by_categories(params[:category])
-    
+
     render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
 
@@ -74,7 +74,7 @@ class OfferedProductsController < ApplicationController
         @offered_products = @offered_products.order_by_price('desc')
       when 'id'
         @offered_products = @offered_products.order_by_id
-      when '-id'  
+      when '-id'
         @offered_products = @offered_products.order_by_id('desc')
       else
         @offered_products = @offered_products.order_by_id
@@ -82,7 +82,7 @@ class OfferedProductsController < ApplicationController
     end
     render json: @offered_products , status: :ok, root: "data", adapter: :json
   end
-  
+
   def offered_products_most_selled
     @offered_products= OfferedProduct.most_selled(params[:top])
     render json: @offered_products, :each_serializer => OfferedProductSumSerializer, status: :ok, root: "data", adapter: :json
@@ -101,7 +101,6 @@ class OfferedProductsController < ApplicationController
       end
       @offered_product = @offered_products.offered_product_by_id(params[:id])
     end
-
     # Only allow a trusted parameter "white list" through.
     def offered_product_params
       params.require(:offered_product).permit(:price, :product_id, :distributor_id)

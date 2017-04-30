@@ -22,7 +22,7 @@ class OfferedProduct < ApplicationRecord
   def self.offered_products_by_ids(ids, page = 1, per_page = 10)
   	load_offered_products(page, per_page)
   	.where(offered_products:{
-  		id: ids	
+  		id: ids
 	}).paginate(:page => page, :per_page=> per_page)
   end
 
@@ -32,8 +32,8 @@ class OfferedProduct < ApplicationRecord
   		distributor_id: distributor
 	}).paginate(:page => page, :per_page=> per_page)
   end
-  
-  def self.offered_products_by_retailer(retailer_id, page=1, per_page=10) 
+
+  def self.offered_products_by_retailer(retailer_id, page=1, per_page=10)
     load_offered_products(page, per_page)
     .where(orders:{
       retailer_id: retailer_id
@@ -42,14 +42,14 @@ end
   def self.offered_products_by_categories(categories, page=1, per_page=10)
     load_offered_products(page, per_page)
     .where(products:{
-        category: categories    
+        category: categories
     }).paginate(:page => page, :per_page=> per_page)
   end
 
   def self.most_selled(top)
       joins(:orderProducts).group(:id).select("offered_products.*, sum( order_products.quantity) as sum_q").order("sum_q DESC").limit(top)
   end
-  
+
   def self.suggest_to_retailer(retailer_id, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.find_by_id(retailer_id)
@@ -75,6 +75,10 @@ end
     .where(products:{
       name: param
     })
+  end
+  def self.offered_products_by_select(params, page=1, per_page=10)
+    load_offered_products(page, per_page)
+    .select(params.map &:to_sym)
   end
 
   def self.offered_products_close_to_retailer(retailer_id, page=1, per_page=10)
@@ -112,5 +116,5 @@ end
     end
     s1.to_a.paginate(:page => page, :per_page=> per_page)
   end
-  
+
 end

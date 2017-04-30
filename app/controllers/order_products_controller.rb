@@ -3,7 +3,7 @@ class OrderProductsController < ApplicationController
 
   # GET /order_products
   def index
-    @order_products = OrderProduct.load_orderProducts
+    @order_products = OrderProduct.load_orderProducts(params[:page], params[:per_page])
     render json: @order_products, root: "data", adapter: :json
   end
 

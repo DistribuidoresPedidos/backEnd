@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     scope '/v1' do
 
         resources :distributors, only: [:index, :show] do
+          collection do
+            get 'distributor_by_param', to: 'distributors#distributor_by_param'
+          end
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
           get 'suggest_retailers', to: 'retailers#suggest_to_distributor_by_category'
@@ -30,7 +33,7 @@ Rails.application.routes.draw do
 
           get 'suggest_to_retailer', to: 'offered_products#suggest_to_retailer'
           get 'offered_products_by_retailer', to: 'offered_products#offered_products_by_param_retailer'
-          get 'offered_products_by_param_retailer_match', to: 'offered_products#offered_products_by_param_retailer_match'          
+          get 'offered_products_by_param_retailer_match', to: 'offered_products#offered_products_by_param_retailer_match'
           get 'offered_products_close', to: 'offered_products#offered_products_close_to_retailer'
 
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
@@ -79,6 +82,6 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'Retailer', at: 'api/v1/retai_path',  skip: [:omniauth_callbacks] , controllers:{
     registrations: 'overrides/registrations',
-  
+
   }
 end

@@ -45,5 +45,8 @@ class Distributor < ActiveRecord::Base
       retailer_id: retailer
     }).paginate(:page => page,:per_page => per_page)
   end
-
+  def self.distributor_by_param(params, page=1, per_page=10)
+    load_distributors(page, per_page)
+    .select(params.map &:to_sym)
+  end
 end
