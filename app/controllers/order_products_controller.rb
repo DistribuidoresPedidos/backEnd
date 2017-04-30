@@ -4,12 +4,12 @@ class OrderProductsController < ApplicationController
   # GET /order_products
   def index
     @order_products = OrderProduct.load_orderProducts(params[:page], params[:per_page])
-    render json: @order_products, root: "data", adapter: :json
+    render json: @order_products, root: "data", each_serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
   end
 
   # GET /order_products/1
   def show
-    render json: @order_product, root: "data", adapter: :json
+    render json: @order_product, root: "data", each_serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
   end
 
   # POST /order_products
@@ -17,7 +17,7 @@ class OrderProductsController < ApplicationController
     @order_product = OrderProduct.new(order_product_params)
 
     if @order_product.save
-      render json: @order_product, status: :created,root: "data", adapter: :json
+      render json: @order_product, status: :created,root: "data",  serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
     else
       render json: @order_product.errors, status: :unprocessable_entity
     end
@@ -25,13 +25,13 @@ class OrderProductsController < ApplicationController
   # GET /orders/1/order_products
   def order_products_by_order
     @order_products = OrderProduct.orderProduct_by_order(params[:order_id], params[:page], params[:per_page])
-    render json: @order_products, root: "data", adapter: :json
+    render json: @order_products, root: "data", each_serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
   end
 
   # PATCH/PUT /order_products/1
   def update
     if @order_product.update(order_product_params)
-      render json: @order_product, root: "data", adapter: :json
+      render json: @order_product, root: "data",  serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
     else
       render json: @order_product.errors, status: :unprocessable_entity
     end

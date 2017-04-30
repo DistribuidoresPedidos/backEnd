@@ -3,21 +3,21 @@ class OrdersController < ApplicationController
 
   # GET /retailers/:id/orders
   def index
-    render json: @orders,root: "data", adapter: :json
+    render json: @orders,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   # GET /retailers/:id/orders/1
-  # GET /distributors/:id/orders/1  
+  # GET /distributors/:id/orders/1
   def show
     @order = @orders.order_by_id(params[:id])
-    render json: @order,root: "data", adapter: :json
+    render json: @order,root: "data",each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   # POST /orders
   def create
     @order = Order.new(order_params)
     if @order.save
-      render json: @order, status: :created,root: "data", adapter: :json
+      render json: @order, status: :created,root: "data", serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /retailers/:id/orders/1
   def update
     if @order.update(order_params)
-      render json: @order,root: "data", adapter: :json
+      render json: @order,root: "data",serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
-    render json: @orders,root: "data", adapter: :json
+    render json: @orders,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   # GET retailer|distributor/:id/orders_by_exit_date
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
     else
       @orders = Order.load_orders(params[:page], params[:per_page])
     end
-    render json: @orders,root: "data", adapter: :json
+    render json: @orders,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   #POST /retailers/:id/make_order
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
         @order.totalPrice += @subtotal
       end
       @order.save
-    render json: @order, status: :created,root: "data", adapter: :json
+    render json: @order, status: :created,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
       else
         @orders = Order.load_orders(params[:page], params[:per_page])
       end
-      if params.has_key?(:id) 
+      if params.has_key?(:id)
         @order = Order.find(params[:id])
       end
     end
