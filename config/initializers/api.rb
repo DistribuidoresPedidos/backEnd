@@ -1,0 +1,3 @@
+AWS_SECRET_KEY = ENV["AWS_SECRET_KEY"]
+AWS_ACCESS_KEY = ENV["AWS_ACCESS_KEY"]
+require 'will_paginate/array'
