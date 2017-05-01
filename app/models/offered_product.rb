@@ -68,11 +68,19 @@ end
     s1.to_a
   end
 
-  def self.offered_products_by_param_match(param)
+  def self.offered_products_by_param_match(param, categories, min_price, max_price)
     includes(:product, distributor:{routes: :coordinates})
     .where(products:{
-      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id)
+      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id),
+      category: categories
+    },
+    offered_products:{
+      price: min_price..max_price
     })
+  end
+
+  def self.simple_search(param, category)
+      Product.search param, aggs: [category], fields: [:name], match: :word_middle, misspellings: {below: 5}
   end
 
   def self.offered_products_by_param(param, page=1, per_page=10)
@@ -108,10 +116,10 @@ end
     s1.to_a
   end
 
-  def self.offered_products_by_param_retailer_match(param, retailer_id, page=1, per_page=10)
+  def self.offered_products_by_param_retailer_match(param, retailer_id, categories, min_price, max_price, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.retailer_by_id(retailer_id)
-    possible_offered_product = offered_products_by_param_match(param)
+    possible_offered_product = offered_products_by_param_match(param, categories, min_price, max_price)
     possible_offered_product.each do |i|
       coordinates = Coordinate.find_by_offered_product(i)
       c = coordinates.within_radius(20000, retailer.latitude, retailer.longitude)
