@@ -4,6 +4,8 @@ class OfferedProduct < ApplicationRecord
   has_many :orderProducts
   has_many :orders, :through => :orderProducts
   validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  #change table
+  mount_uploader :photo, PictureUploader
 
   scope :order_by_id, -> (ord) {order("offered_products.id #{ord}")}
   scope :order_by_price, -> (ord) {order("offered_products.price #{ord}")}

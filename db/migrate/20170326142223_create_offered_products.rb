@@ -1,7 +1,8 @@
 class CreateOfferedProducts < ActiveRecord::Migration[5.0]
   def change
     create_table :offered_products do |t|
-      t.float :price, :null=> false 
+      t.float :price, :null=> false
+      t.string :photo
       t.references :product, foreign_key: true
       t.references :distributor, foreign_key: true
 
