@@ -74,6 +74,14 @@ class ProductsController < ApplicationController
 
     render json: @products, status: :ok,root: "data"
   end
+
+  def simple_search
+    @products = Product.search "a"
+    @products.each do |product|
+      puts @product.name
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

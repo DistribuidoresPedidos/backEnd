@@ -7,6 +7,9 @@ class OfferedProduct < ApplicationRecord
 
   scope :order_by_id, -> (ord) {order("offered_products.id #{ord}")}
   scope :order_by_price, -> (ord) {order("offered_products.price #{ord}")}
+  
+  #ElasticSearch
+  searchkick
 
 #Solo returna los que han sido ordenados , más no todos los offeredProducts
   def self.load_offered_products(page = 1, per_page = 10)
@@ -66,8 +69,10 @@ end
   end
 
   def self.offered_products_by_param_match(param)
-    joins(:product, distributor:{routes: :coordinates})
-    .where("products.name LIKE ? OR products.category LIKE ?", "%#{param}%", "%#{param}%")
+    includes(:product, distributor:{routes: :coordinates})
+    .where(products:{
+      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id)
+    })
   end
 
   def self.offered_products_by_param(param, page=1, per_page=10)
