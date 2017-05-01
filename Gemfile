@@ -68,6 +68,4 @@ gem 'rack', '~> 2.0', '>= 2.0.1'
 gem 'rack-throttle', '~> 0.5.0'
 
 #Super search like google
-gem 'elasticsearch', '>= 1.0.15'
-gem 'faraday_middleware-aws-signers-v4'
 gem 'searchkick'
