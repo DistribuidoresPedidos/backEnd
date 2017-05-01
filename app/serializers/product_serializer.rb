@@ -8,7 +8,7 @@ class ProductSerializer < ActiveModel::Serializer
   attribute :name, if: :render_name?
   attribute :category, if: :render_category?
   attribute :weight, if: :render_weight?
-  attribute :photo, if: :render_photo?
+
 
   has_many :offeredProducts
   has_many :distributors, :through => :offeredProducts
@@ -28,7 +28,5 @@ class ProductSerializer < ActiveModel::Serializer
   def render_weight?
     render?(instance_options[:render_attribute].split(","),"product.weight","weight")
   end
-  def render_photo?
-    render?(instance_options[:render_attribute].split(","),"product.photo","photo")
-  end
+  
 end

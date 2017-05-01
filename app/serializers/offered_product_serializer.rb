@@ -6,6 +6,7 @@ class OfferedProductSerializer < ActiveModel::Serializer
 
   attribute :id, if: :render_id?
   attribute :price, if: :render_price?
+  attribute :photo, if: :render_photo?
 
   belongs_to :product
   belongs_to :distributor
@@ -27,4 +28,9 @@ class OfferedProductSerializer < ActiveModel::Serializer
   def render_distributor_id?
     render?(instance_options[:render_attribute].split(","),"offered_product.distributor_id","distributor_id")
   end
+
+  def render_photo?
+    render?(instance_options[:render_attribute].split(","),"offered_product.photo","photo")
+  end
+
 end
