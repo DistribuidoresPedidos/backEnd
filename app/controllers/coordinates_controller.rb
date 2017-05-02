@@ -38,7 +38,7 @@ class CoordinatesController < ApplicationController
   end
 
   def coordinate_by_ordered_product
-    @coordinates = Coordinate.find_by_ordered_product(params[:order__id])
+    @coordinates = Coordinate.find_by_offered_product(params[:order__id])
     render json: @coordinates,root: "data", each_serializer: CoordinateSerializer, render_attribute: params[:select_coordinate] || "all"
   end
 
