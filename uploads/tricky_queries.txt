@@ -1,0 +1,1 @@
+ps = OfferedProduct.offered_products_by_param_retailer_match('*', 1, ['cat1', 'cat3'], 1, 100)

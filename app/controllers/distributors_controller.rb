@@ -23,9 +23,8 @@ class DistributorsController < ApplicationController
 
     select_colums= @distributor_by_params.map(&:to_sym)
 
-    @select= Distributor.distributor_by_param(select_colums)
+    @select= Distributor.distributor_by_param(params[:q], select_colums)
     render json: @select, status: :ok, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
-
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -11,11 +11,15 @@ class Retailer < ActiveRecord::Base
   validates :email, :phoneNumber, uniqueness: true
 
   scope :ordered_by_id, -> { order(id: :asc) }
+  scope :order_by_id, -> (ord) {order("retailers.id #{ord}")}
+  scope :order_by_name, -> (ord) {order("retailers.name #{ord}")}
 
   mount_uploader :photo, PictureUploader
 
   reverse_geocoded_by :latitude, :longitude, :address => :location
   after_validation :reverse_geocode, if: ->(obj){ obj.latitude.present? and obj.latitude_changed? }
+
+  searchkick word_middle: [:name]
 
   def self.load_retailers(page=1, per_page=10)
     includes(:comments, orders:[:orderProducts])
@@ -56,10 +60,11 @@ class Retailer < ActiveRecord::Base
     }).paginate(:page => page,:per_page => per_page)
   end
 
-  def self.retailer_by_param(params, page=1, per_page=10)
-    load_retailers(page, per_page)
-    .select(params.map &:to_sym)
+  def self.retailer_by_param(q, params, page=1, per_page=10)
+    load_retailers(page, per_page).select(params.map &:to_sym).
+    search q, fields: [:name], match: :word_middle, misspellings: {below: 5}
   end
+  
   def self.suggest_to_distributor(distributor, page=1, per_page=10)
     s1 = Set.new
     possibleRetailers = Retailer.retailers_by_distributor(distributor)

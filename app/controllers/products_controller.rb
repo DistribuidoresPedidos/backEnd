@@ -24,7 +24,6 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
-
     if @product.save
       render json: @product, status: :created,root: "data", serializer: ProductSerializer, render_attribute: params[:select_product] || "all"
     else
