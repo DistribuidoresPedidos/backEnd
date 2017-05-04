@@ -7,12 +7,15 @@ class Product < ApplicationRecord
 
 #  default_scope {order('products.name ASC')}
 
+    searchkick word_middle: [:name]
+  #  default_scope {order('products.name ASC')}
+
     def self.load_products(page=1 , per_page=10)
         includes(:offeredProducts,distributors:[:routes])
         .paginate(:page => page, :per_page => per_page)
     end
 
- def self.product_by_id(id, page=1, per_page=10)
+    def self.product_by_id(id, page=1, per_page=10)
         load_products(page, per_page)
         .where(products:{
             id: id

@@ -28,7 +28,7 @@ class RetailersController < ApplicationController
 
     select_colums= @retailer_by_params.map(&:to_sym)
 
-    @select= Retailer.retailer_by_param(select_colums)
+    @select= Retailer.retailer_by_param(params[:q], select_colums)
     render json: @select, status: :ok, root: "data",  each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
 
   end
