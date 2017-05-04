@@ -1318,7 +1318,6 @@ Retailer.all.each do |r|
 	r.photo = Rails.root.join("images/" + img).open
 	r.save
 end
-
 Distributor.all.each do |d|
 	img = rand(1...18).to_s + ".jpg"
 	d.photo = Rails.root.join("images/" + img).open
