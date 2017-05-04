@@ -12,6 +12,7 @@ class RetailerSerializer < ActiveModel::Serializer
   attribute :photo, if: :render_photo?
   attribute :latitude, if: :render_latitude?
   attribute :longitude, if: :render_longitude?
+  attribute :location, if: :render_location?
 
   has_many :orders
   has_many :comments, :through => :orders
@@ -47,6 +48,10 @@ class RetailerSerializer < ActiveModel::Serializer
     render?(instance_options[:render_attribute].split(","),"retailer.longitude","longitude")
   end
 
+
+    def render_location?
+      render?(instance_options[:render_attribute].split(","),"retailer.location","location")
+    end
 
   def render_description?
     render?(instance_options[:render_attribute].split(","),"retailer.description","description")
