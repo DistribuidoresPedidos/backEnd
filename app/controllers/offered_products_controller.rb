@@ -58,7 +58,7 @@ class OfferedProductsController < ApplicationController
   end
 
   def offered_products_by_param_retailer_match
-    @offered_products= OfferedProduct.offered_products_by_param_retailer_match(params[:q], params[:retailer_id], params[:page], params[:per_page])
+    @offered_products = OfferedProduct.offered_products_by_param_retailer_match(params[:q], params[:retailer_id], params[:categories], params[:min_price], params[:max_price], params[:page], params[:per_page])
     render json: @offered_products , status: :ok, root: "data",each_serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
   end
 
