@@ -58,6 +58,11 @@ class Product < ApplicationRecord
         products_by_distributor(distributor_id, page, per_page)
         .distinct.pluck(:category)
     end
+    def self.categories( page=1, per_page=10)
+       load_products(page, per_page)
+       .distinct.pluck(:category)
+
+    end
 
 
 end
