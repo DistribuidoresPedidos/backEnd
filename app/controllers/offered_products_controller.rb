@@ -19,6 +19,7 @@ class OfferedProductsController < ApplicationController
   # POST /offered_products
   def create
     @offered_product = OfferedProduct.new(offered_product_params)
+    @offered_product.photo = params[:file]
 
     if @offered_product.save
       render json: @offered_product, status: :created,root: "data",serializer: OfferedProductSerializer, render_attribute: params[:select_offered_product] || "all"#,
