@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   has_many :orderProducts
   has_many :comments
   has_many :offeredProducts, :through => :orderProducts , :source=> :offered_product
-  validates :state , presence: true
+  validates :state, presence: true
   validates :totalPrice ,numericality: true, presence: true
 
 

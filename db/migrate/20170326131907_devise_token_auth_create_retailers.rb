@@ -42,7 +42,7 @@ class DeviseTokenAuthCreateRetailers < ActiveRecord::Migration[5.0]
       t.string :photo
       t.float :latitude
       t.float :longitude
-     t.string :location
+      t.string :location
       ## Tokens
       t.json :tokens
 
