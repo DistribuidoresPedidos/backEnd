@@ -136,7 +136,7 @@ end
     retailer = Retailer.retailer_by_id(retailer_id)
     includes(:product, distributor:{routes: :coordinates})
     .where(products:{
-      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id)
+      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 10}).pluck(:id)
     }, 
     coordinates: {
       id: Coordinate.within_radius(200000, retailer.latitude, retailer.longitude).pluck(:id)
