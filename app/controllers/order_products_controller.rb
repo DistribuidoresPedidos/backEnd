@@ -24,7 +24,7 @@ class OrderProductsController < ApplicationController
   end
   # GET /orders/1/order_products
   def order_products_by_order
-    @order_products = OrderProduct.orderProduct_by_order(params[:order_id], params[:page], params[:per_page])
+    @order_products = OrderProduct.orderProducts_by_order(params[:order_id], params[:page], params[:per_page])
     render json: @order_products, root: "data", each_serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
   end
 
