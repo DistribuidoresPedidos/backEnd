@@ -64,6 +64,7 @@ Rails.application.routes.draw do
           get 'products_by_ids', to: 'products#products_by_ids'
           get 'products_by_categories', to: 'products#products_by_categories'
           get 'simple_search', to: 'products#simple_search'
+          get 'categories', to: 'products#products_categories'
       end
     end
 
