@@ -39,6 +39,7 @@ module Overrides
         resource_class.skip_callback("create", :after, :send_on_create_confirmation_instructions)
 
         if @resource.save
+          UserMailer.welcome_email(@resource).deliver
           yield @resource if block_given?
             unless @resource.confirmed?
                 #user will require email authentication
@@ -59,7 +60,6 @@ module Overrides
               puts @resource.errors.full_messages
               update_auth_header
             end
-
             render_create_success
 
           else
