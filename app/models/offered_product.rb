@@ -139,7 +139,7 @@ end
       id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id)
     }, 
     coordinates: {
-      id: Coordinate.within_radius(300, retailer.latitude, retailer.longitude).pluck(:id)
+      id: Coordinate.within_radius(200000, retailer.latitude, retailer.longitude).pluck(:id)
     }).paginate(:page => page, :per_page=> per_page)
   end
   
