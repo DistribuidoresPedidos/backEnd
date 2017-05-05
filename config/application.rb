@@ -49,8 +49,8 @@ module DealersApi
 
     config.middleware.use Rack::Deflater
     config.autoload_paths += %W(#{config.root}/lib)
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
+    #config.middleware.use ActionDispatch::Cookies
+    #config.middleware.use ActionDispatch::Session::CookieStore
   end
 
 end
