@@ -1,5 +1,5 @@
 class RetailersController < ApplicationController
-  before_action :set_retailer, only: [:show, :update, :destroy]
+  before_action :set_retailer, only: [:show, :update]
 
   # GET /retailers
   def index
@@ -31,6 +31,16 @@ class RetailersController < ApplicationController
     @select= Retailer.retailer_by_param(params[:q], select_colums)
     render json: @select, status: :ok, root: "data",  each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
 
+  end
+  def destroy
+
+    @retailer= Retailer.retailer_by_id(params[:retailer_id])
+    @retailer.destroy
+
+    if @retailer.destroy
+        puts 'user deleted'
+
+    end
   end
   private
     # Use callbacks to share common setup or constraints between actions.
