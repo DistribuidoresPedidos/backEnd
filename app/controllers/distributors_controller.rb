@@ -1,5 +1,5 @@
 class DistributorsController < ApplicationController
-  before_action :set_distributor, only: [:show, :update, :destroy]
+  before_action :set_distributor, only: [:show, :update]
  # before_action :authenticate_retailer!, only: [:distributors_by_retailer]
  # before_action :authenticate_distributor!, except: [:distributors_by_retailer]
   # GET /distributors
@@ -25,6 +25,17 @@ class DistributorsController < ApplicationController
 
     @select= Distributor.distributor_by_param(select_colums)
     render json: @select, status: :ok, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
+
+  end
+  def destroy
+
+    @distributor= Distributor.distributor_by_id(params[:distributor_id])
+    @distributor.destroy
+
+    if @distributor.destroy
+        puts 'user deleted'
+
+    end
 
   end
   private
