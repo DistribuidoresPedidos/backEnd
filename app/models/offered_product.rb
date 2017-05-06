@@ -81,13 +81,6 @@ end
     })
   end
 
-  def self.offered_products_by_param_match_all(param)
-    includes(:product, distributor:{routes: :coordinates})
-    .where(products:{
-      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 5}).pluck(:id)
-    })
-  end
-
   def self.simple_search(param, category)
       Product.search param, aggs: [category], fields: [:name], match: :word_middle, misspellings: {below: 5}
   end
@@ -125,10 +118,10 @@ end
     s1.to_a
   end
 
-  def self.offered_products_by_param_retailer_match(param, retailer_id, page=1, per_page=10)
+  def self.offered_products_by_param_retailer_match_old(param, retailer_id, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.retailer_by_id(retailer_id)
-    possible_offered_product = offered_products_by_param_match_all(param)
+    possible_offered_product = offered_products_by_param_match_all(param, retailer.latitude, retailer.longitude)
     possible_offered_product.each do |i|
       coordinates = Coordinate.find_by_offered_product(i)
       c = coordinates.within_radius(20000, retailer.latitude, retailer.longitude)
@@ -138,5 +131,16 @@ end
     end
     s1.to_a.paginate(:page => page, :per_page=> per_page)
   end
-
+  
+  def self.offered_products_by_param_retailer_match(param, retailer_id, page=1, per_page=10)
+    retailer = Retailer.retailer_by_id(retailer_id)
+    includes(:product, distributor:{routes: :coordinates})
+    .where(products:{
+      id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 1}).pluck(:id)
+    }, 
+    coordinates: {
+      id: Coordinate.within_radius(200000, retailer.latitude, retailer.longitude).pluck(:id)
+    }).paginate(:page => page, :per_page=> per_page)
+  end
+  
 end
