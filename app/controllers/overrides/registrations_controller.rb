@@ -13,6 +13,8 @@ module Overrides
         @resource.email= sign_up_params[:email]
       end
 
+      UserMailer.welcome_email(@resource).deliver_now
+
       # give redirect value from params priority
       @redirect_url= params[:confirm_success_url]
 
@@ -39,7 +41,6 @@ module Overrides
         resource_class.skip_callback("create", :after, :send_on_create_confirmation_instructions)
 
         if @resource.save
-          UserMailer.welcome_email(@resource).deliver
           yield @resource if block_given?
             unless @resource.confirmed?
                 #user will require email authentication
@@ -72,5 +73,29 @@ module Overrides
           render_create_error_email_already_exists
         end
       end
+
+      def update 
+       if @resource 
+         @resource1 = @resource 
+         if @resource1.send(resource_update_method, account_update_params) 
+           yield @resource1 if block_given? 
+           render_update_success 
+         else 
+           render_update_error 
+         end 
+       else 
+         render_update_error_user_not_found 
+       end 
+     end 
+      def destroy 
+        if @resource 
+          @resource.destroy 
+          yield @resource if block_given? 
+ 
+          render_destroy_success 
+        else 
+          render_destroy_error 
+        end 
+      end 
     end
 end

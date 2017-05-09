@@ -37,6 +37,12 @@ class OrdersController < ApplicationController
     @order.destroy
   end
 
+  def test_mailer
+    @retailer = Retailer.retailer_by_id(params[:retailer_id])
+    #render json: @retailer.email
+    UserMailer.welcome_email(@retailer).deliver_now
+  end
+
   # GET retailer|distributor/:id/orders_by_arrival_date
   def orders_by_arrival_date
    if params.has_key?(:retailer_id)

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
           get 'suggest_retailers', to: 'retailers#suggest_to_distributor_by_category'
           get 'categories_by_distributor', to: 'products#categories_by_distributor'
           get 'comments', to: 'comments#comments_by_distributor'
+          match 'destroy', to: 'distributors#destroy', via: [:get , :delete] 
           resources :orders, except: [:create]
           resources :products
           resources :offered_products
@@ -23,12 +24,13 @@ Rails.application.routes.draw do
    # end
 
 
-        resources :retailers, only: [:index, :show] do
+        resources :retailers do 
           collection do
             get 'retailer_by_categories', to: 'retailers#retailer_by_category_products'
             get 'retailer_by_param', to: 'retailers#retailer_by_param'
           end
 
+          get 'test_mailer', to: 'orders#test_mailer'
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
 
@@ -40,6 +42,8 @@ Rails.application.routes.draw do
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer'
           get 'categories_by_retailer', to: 'products#categories_by_retailer'
+          #destroy 
+          match 'destroy', to: 'retailers#destroy', via: [:get , :delete] 
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
         end

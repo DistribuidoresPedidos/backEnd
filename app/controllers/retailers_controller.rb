@@ -1,5 +1,5 @@
 class RetailersController < ApplicationController
-  before_action :set_retailer, only: [:show, :update, :destroy]
+  before_action :set_retailer, only: [:show, :update] 
 
   # GET /retailers
   def index
@@ -25,6 +25,8 @@ class RetailersController < ApplicationController
 
   def retailer_by_param
     @retailer_by_params= params[:select_retailer].split(',')
+    
+    UserMailer.welcome_email(@retailer_by_params).deliver_now
 
     select_colums= @retailer_by_params.map(&:to_sym)
 
@@ -32,6 +34,18 @@ class RetailersController < ApplicationController
     render json: @select, status: :ok, root: "data",  each_serializer: RetailerSerializer, render_attribute: params[:select_retailer] || "all"
 
   end
+
+  def destroy 
+ 
+    @retailer= Retailer.retailer_by_id(params[:retailer_id])
+    @retailer.destroy 
+ 
+    if @retailer.destroy 
+        puts 'user deleted' 
+ 
+    end 
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_retailer
