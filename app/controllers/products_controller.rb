@@ -25,7 +25,21 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      render json: @product, status: :created,root: "data", serializer: ProductSerializer, render_attribute: params[:select_product] || "all"
+      params[:product_id]=@product.id
+
+      puts params[:product_id]
+
+      @offered_product= OfferedProduct.new
+      @offered_product.photo= params[:photo]
+      @offered_product.price= params[:price]
+      @offered_product.product_id= @product.id
+      @offered_product.distributor_id= params[:distributor_id]
+
+      if @offered_product.save
+        render json: @offered_product, status: :created,root: "data", serializer: OfferedProductSerializer, render_attribute: params[:select_product] || "all"
+      else
+          render json: @offered_product.errors, status: :unprocessable_entity
+      end
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -101,7 +115,8 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:name, :category, :weight, :photo)
+      params.require(:product).permit(:name, :category, :weight)
+
     end
 
     def set_ids
