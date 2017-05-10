@@ -26,14 +26,12 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       params[:product_id]=@product.id
-
-      puts params[:product_id]
-
       @offered_product= OfferedProduct.new
-      @offered_product.photo= params[:photo]
-      @offered_product.price= params[:price]
+      @offered_product.photo= product_offered_params[:photo]
+      @offered_product.price= product_offered_params[:price]
+
       @offered_product.product_id= @product.id
-      @offered_product.distributor_id= params[:distributor_id]
+      @offered_product.distributor_id= product_offered_params[:distributor_id]
 
       if @offered_product.save
         render json: @offered_product, status: :created,root: "data", serializer: OfferedProductSerializer, render_attribute: params[:select_product] || "all"
@@ -118,7 +116,10 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :category, :weight)
 
     end
+    def product_offered_params
+      params.require(:offered_product).permit( :photo,:price, :distributor_id)
 
+    end
     def set_ids
         ids = nil
       if params.has_key?(:product)
