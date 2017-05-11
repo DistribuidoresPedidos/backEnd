@@ -1,5 +1,5 @@
-class DistributorsController < ApplicationController 
-  before_action :set_distributor, only: [:show, :update] 
+class DistributorsController < ApplicationController
+  before_action :set_distributor, only: [:show, :update, :destroy]
  # before_action :authenticate_retailer!, only: [:distributors_by_retailer]
  # before_action :authenticate_distributor!, except: [:distributors_by_retailer]
   # GET /distributors
@@ -20,26 +20,13 @@ class DistributorsController < ApplicationController
 
   def distributor_by_param
     @distributor_by_params= params[:select_distributor].split(',')
-    
+
     select_colums= @distributor_by_params.map(&:to_sym)
 
     @select= Distributor.distributor_by_param(select_colums)
     render json: @select, status: :ok, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
 
   end
-
-    def destroy 
- 
-    @distributor= Distributor.distributor_by_id(params[:distributor_id]) 
-    @distributor.destroy 
- 
-    if @distributor.destroy 
-        puts 'user deleted' 
- 
-    end 
- 
-  end 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_distributor

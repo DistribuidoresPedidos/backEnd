@@ -6,25 +6,29 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
-  config.action_mailer_perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.api_only = false
-  config.action_mailer.perform_deliveries = true
+  # Do not eager load code on boot.
+  config.eager_load = false
+
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer_perform_deliveries = true
+
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+
+# SMTP settings for gmail
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'dealers.com',
-    user_name:            'ofnanezn',
-    password:             '01051995',
+    user_name:            'onanez45',
+    password:             'ofnanezn',
     authentication:       'plain',
-    enable_starttls_auto: true
+    enable_starttls_auto: true 
   }
 
-  # Do not eager load code on boot.
-  config.eager_load = false
+    # user = Retailer.find_by_id(2)
+  # mail = UserMailer.welcome_email(user)
+  # mail.deliver
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -42,6 +46,9 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 

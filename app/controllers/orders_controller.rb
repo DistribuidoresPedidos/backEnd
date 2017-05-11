@@ -23,6 +23,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def test_mailer
+    @retailer = Retailer.retailer_by_id(params[:retailer_id])
+    #render json: @retailer.email
+    UserMailer.welcome_email(@retailer).deliver
+    render json: @retailer.email
+  end
+
   # PATCH/PUT /retailers/:id/orders/1
   def update
     if @order.update(order_params)
@@ -35,12 +42,6 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   def destroy
     @order.destroy
-  end
-
-  def test_mailer
-    @retailer = Retailer.retailer_by_id(params[:retailer_id])
-    #render json: @retailer.email
-    UserMailer.welcome_email(@retailer).deliver_now
   end
 
   # GET retailer|distributor/:id/orders_by_arrival_date

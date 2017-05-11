@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
-  default from: 'ofnanezn@gmail.com'
- 
+  default from: "onanez45@gmail.com"
+
   def welcome_email(user)
     @user = user
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Bienvenido a Dealers!')
+    @url  = 'http://dealers.com/login'
+    mail(:to => @user.email, :subject => 'Welcome to Dealers')
   end
 end
