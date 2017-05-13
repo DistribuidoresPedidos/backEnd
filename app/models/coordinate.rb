@@ -35,4 +35,9 @@ class Coordinate < ApplicationRecord
     })
   end
 
+  def self.close_to_retailer(retailer_id)
+    retailer = Retailer.find_by_id(retailer_id)
+    Coordinate.within_radius(200, retailer.latitude, retailer.longitude).
+    includes(route: {distributor: :offeredProducts})
+  end
 end

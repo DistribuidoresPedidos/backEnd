@@ -41,10 +41,12 @@ Rails.application.routes.draw do
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer'
           get 'categories_by_retailer', to: 'products#categories_by_retailer'
+
           #destroy
           match 'destroy', to: 'retailers#destroy', via: [:get , :delete]
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
+          resources :coordinates, only: [:index]
         end
 
 

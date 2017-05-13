@@ -1,8 +1,9 @@
 class CoordinatesController < ApplicationController
   before_action :set_coordinate, only: [:show, :update, :destroy]
 
-  # GET /coordinates
+  # GET retailers/:id/coordinates
   def index
+    @coordinates = Coordinate.close_to_retailer(params[:retailer_id])
     render json: @coordinates,root: "data", each_serializer: CoordinateSerializer, render_attribute: params[:select_coordinate] || "all"
   end
 
@@ -38,7 +39,7 @@ class CoordinatesController < ApplicationController
   end
 
   def coordinate_by_ordered_product
-    @coordinates = Coordinate.find_by_offered_product(params[:order__id])
+    @coordinates = Coordinate.find_by_offered_product(params[:order_id])
     render json: @coordinates,root: "data", each_serializer: CoordinateSerializer, render_attribute: params[:select_coordinate] || "all"
   end
 
