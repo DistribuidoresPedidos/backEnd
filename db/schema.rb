@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "title",        null: false
     t.text     "content",      null: false
     t.date     "dateComment"
+    t.integer  "calification"
     t.integer  "order_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "calification", null: false
     t.index ["order_id"], name: "index_comments_on_order_id", using: :btree
   end
 
@@ -57,9 +57,10 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "name",                                     null: false
     t.string   "email",                                    null: false
     t.string   "phoneNumber",                              null: false
-    t.string   "photo",                                    null: false
+    t.string   "photo"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "location"
     t.json     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170330201457) do
 
   create_table "offered_products", force: :cascade do |t|
     t.float    "price",          null: false
+    t.string   "photo"
     t.integer  "product_id"
     t.integer  "distributor_id"
     t.datetime "created_at",     null: false
@@ -107,7 +109,6 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.string   "name",       null: false
     t.string   "category",   null: false
     t.float    "weight",     null: false
-    t.string   "photo",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

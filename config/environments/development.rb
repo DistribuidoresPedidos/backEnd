@@ -9,29 +9,24 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer_perform_deliveries = true
-
-  config.action_mailer.default_url_options = {host: 'localhost:3000'}
-
-# SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'dealers.com',
-    user_name:            'onanez45',
-    password:             'ofnanezn',
-    authentication:       'plain',
-    enable_starttls_auto: true 
-  }
-
-    # user = Retailer.find_by_id(2)
-  # mail = UserMailer.welcome_email(user)
-  # mail.deliver
-
   # Show full error reports.
   config.consider_all_requests_local = true
+
+  #Mailers
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'dealers.com',
+  user_name:            'onanez45',
+  password:             'ofnanezn',
+  authentication:       'plain',
+  enable_starttls_auto: true  }
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?

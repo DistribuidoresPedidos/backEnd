@@ -29,7 +29,6 @@ Rails.application.routes.draw do
             get 'retailer_by_param', to: 'retailers#retailer_by_param'
           end
 
-          get 'test_mailer', to: 'orders#test_mailer'
           get 'orders_by_arrival_date', to: 'orders#orders_by_arrival_date'
           get 'orders_by_exit_date', to: 'orders#orders_by_exit_date'
 

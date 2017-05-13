@@ -23,13 +23,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def test_mailer
-    @retailer = Retailer.retailer_by_id(params[:retailer_id])
-    #render json: @retailer.email
-    UserMailer.welcome_email(@retailer).deliver
-    render json: @retailer.email
-  end
-
   # PATCH/PUT /retailers/:id/orders/1
   def update
     if @order.update(order_params)
