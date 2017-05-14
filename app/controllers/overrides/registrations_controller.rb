@@ -59,7 +59,7 @@ module Overrides
               puts @resource.errors.full_messages
               update_auth_header
             end
-
+            UserMailer.welcome_email(@resource).deliver
             render_create_success
 
           else
