@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /retailers/:id/orders
   def index
-    render json: @orders,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
+    render json: @orders, root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   # GET /retailers/:id/orders/1

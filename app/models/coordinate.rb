@@ -1,9 +1,10 @@
 class Coordinate < ApplicationRecord
   belongs_to :route
+  has_one :distributor, through: :route
   acts_as_geolocated
 
   def self.coordinate_by_id(id)
-    includes(:route)
+    includes(route:[:distributor])
     .find_by_id(id)
   end
 

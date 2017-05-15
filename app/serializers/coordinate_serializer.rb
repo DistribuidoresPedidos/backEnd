@@ -9,6 +9,8 @@ class CoordinateSerializer < ActiveModel::Serializer
   attribute :lng, if: :render_lng?
 
   belongs_to :route
+  has_one :distributor, through: :route
+
 
   def render_id?
     render?(instance_options[:render_attribute].split(","),"coordinate.id","id")
