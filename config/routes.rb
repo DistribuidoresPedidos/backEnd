@@ -38,6 +38,7 @@ Rails.application.routes.draw do
           get 'offered_products_by_param_retailer_match', to: 'offered_products#offered_products_by_param_retailer_match'
           get 'offered_products_close', to: 'offered_products#offered_products_close_to_retailer'
 
+          get 'distributors', to: 'distributors#distributor_close_to_retailer'
           get 'distributors_by_retailer', to: 'distributors#distributors_by_retailer'
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer'
           get 'categories_by_retailer', to: 'products#categories_by_retailer'
