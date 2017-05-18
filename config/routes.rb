@@ -62,6 +62,7 @@ Rails.application.routes.draw do
           get 'offered_products_by_param', to: 'offered_products#offered_products_by_param'
         end
         get 'coordinate_by_offered_product', to: 'coordinates#coordinate_by_offered_product'
+        get 'how_many_by_param', to: 'order_products#how_many_by_param'
       end
 
       resources :products do

@@ -38,5 +38,9 @@ class OrderProduct < ApplicationRecord
       }
     }).paginate(:page => page, :per_page => per_page)
     end
+  def self.how_many_by_param(id, param,page=1, per_page=10)
+    selled= Order.where('state= ?', param).select('id');
+    self_sell= load_orderProducts(page, per_page).where('offered_product_id = ? AND order_id IN (?)', id , selled )
 
+  end
 end

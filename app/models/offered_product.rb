@@ -9,7 +9,7 @@ class OfferedProduct < ApplicationRecord
 
   scope :order_by_id, -> (ord) {order("offered_products.id #{ord}")}
   scope :order_by_price, -> (ord) {order("offered_products.price #{ord}")}
-  
+
   #ElasticSearch
   searchkick
 
@@ -54,6 +54,8 @@ end
   def self.most_selled(top)
       joins(:orderProducts).group(:id).select("offered_products.*, sum( order_products.quantity) as sum_q").order("sum_q DESC").limit(top)
   end
+
+
 
   def self.suggest_to_retailer(retailer_id, page=1, per_page=10)
     s1 = Set.new
@@ -131,16 +133,16 @@ end
     end
     s1.to_a.paginate(:page => page, :per_page=> per_page)
   end
-  
+
   def self.offered_products_by_param_retailer_match(param, retailer_id, page=1, per_page=10)
     retailer = Retailer.retailer_by_id(retailer_id)
     includes(:product, distributor:{routes: :coordinates})
     .where(products:{
       id: (Product.search param, fields: [:name], match: :word_middle, misspellings: {below: 1}).pluck(:id)
-    }, 
+    },
     coordinates: {
       id: Coordinate.within_radius(200000, retailer.latitude, retailer.longitude).pluck(:id)
     }).paginate(:page => page, :per_page=> per_page)
   end
-  
+
 end
