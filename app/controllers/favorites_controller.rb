@@ -20,10 +20,10 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new(favorite_params)
     @favorite.retailer_id = params[:retailer_id]
     if Favorite.is_favorite(params[:retailer_id], params[:distributor_id]) > 0
-      render json: {msg: "Favorite already exists"}, status: :unprocessable_entity
+      render json: {msg: "Favorite already exists"}, status: :ok
     else
       if @favorite.save
-        render json: @favorite, root: "data", each_serializer: FavoriteSerializer , render_attribute: params[:select_favorite] || "all"      
+        render json: @favorite, root: "data", each_serializer: FavoriteSerializer , render_attribute: params[:select_favorite] || "all", status: :created     
       else
         render json: @favorite.errors, status: :unprocessable_entity
       end
