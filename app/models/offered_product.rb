@@ -55,8 +55,6 @@ end
       joins(:orderProducts).group(:id).select("offered_products.*, sum( order_products.quantity) as sum_q").order("sum_q DESC").limit(top)
   end
 
-
-
   def self.suggest_to_retailer(retailer_id, page=1, per_page=10)
     s1 = Set.new
     retailer = Retailer.find_by_id(retailer_id)

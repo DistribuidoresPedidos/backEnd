@@ -11,6 +11,7 @@ class DistributorSerializer < ActiveModel::Serializer
   attribute :latitude, if: :render_latitude?
   attribute :longitude, if: :render_longitude?
   attribute :location, if: :render_location?
+  attribute :favorite, if: :render_favorite?  
 
   has_many :offeredProducts
   has_many :products, :through => :offeredProducts
@@ -49,6 +50,10 @@ class DistributorSerializer < ActiveModel::Serializer
   end
   def render_location?
     render?(instance_options[:render_attribute].split(","),"distributor.location","location")
+  end
+
+  def render_favorite?
+    render?(instance_options[:render_attribute].split(","),"distributor.favorite","favorite")
   end
 
 end

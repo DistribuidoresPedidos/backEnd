@@ -26,7 +26,7 @@ class Distributor < ActiveRecord::Base
   searchkick word_middle: [:name]
 
   def self.load_distributors(page=1, per_page=10)
-    includes(:orders, :products, offeredProducts:[:orderProducts], routes:[:coordinates])
+    includes(:orders, :products, :retailers, offeredProducts:[:orderProducts], routes:[:coordinates])
     .ordered_by_id.paginate(:page => page, :per_page => per_page)
   end
 
@@ -60,4 +60,5 @@ class Distributor < ActiveRecord::Base
       id: Coordinate.within_radius(500, retailer.latitude, retailer.longitude).pluck(:id)
     }).paginate(:page => page,:per_page => per_page)
   end
+
 end

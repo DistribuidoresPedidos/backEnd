@@ -20,6 +20,9 @@ class DistributorsController < ApplicationController
 
   def distributor_close_to_retailer
     @distributors= Distributor.distributor_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
+    @distributors.each do |d|
+      d.favorite = Favorite.is_favorite(params[:retailer_id], d.id)
+    end
     render json: @distributors, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
   end
 
@@ -38,7 +41,6 @@ class DistributorsController < ApplicationController
 
     if @distributor.destroy
         puts 'user deleted'
-
     end
 
   end
