@@ -3,16 +3,16 @@ class Order < ApplicationRecord
   belongs_to :route
   has_many :orderProducts
   has_many :comments
-  has_many :offeredProducts, :through => :orderProducts , :source=> :offered_product
+  has_many :offeredProducts, :through => :orderProducts, :source => :offered_product
+
   validates :state, presence: true
   validates :totalPrice ,numericality: true, presence: true
-
 
   #ask the attribute
   scope :delivered, -> { where(state: 'delivered') }
 
   def self.load_orders(page=1, per_page=10)
-    includes(:orderProducts, :comments, :offeredProducts, :route, :retailer, )
+    includes(:orderProducts, :comments, :route, :retailer, offeredProducts:[:product])
     .paginate(:page => page, :per_page => per_page)
   end
   #retrieve a order

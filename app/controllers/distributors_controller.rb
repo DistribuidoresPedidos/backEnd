@@ -18,6 +18,11 @@ class DistributorsController < ApplicationController
     render json: @distributors, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
   end
 
+  def distributor_close_to_retailer
+    @distributors= Distributor.distributor_close_to_retailer(params[:retailer_id], params[:page], params[:per_page])
+    render json: @distributors, root: "data",  each_serializer: DistributorSerializer, render_attribute: params[:select_distributor] || "all"
+  end
+
   def distributor_by_param
     @distributor_by_params= params[:select_distributor].split(',')
 

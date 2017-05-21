@@ -6,6 +6,8 @@ class Distributor < ActiveRecord::Base
   has_many :products, :through => :offeredProducts
   has_many :routes
   has_many :orders, :through => :routes
+  has_many :favorites
+  has_many :retailers, :through => :favorites
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable,  :validatable,
@@ -49,5 +51,13 @@ class Distributor < ActiveRecord::Base
   def self.distributor_by_param(q, params, page=1, per_page=10)
     load_distributors(page, per_page).select(params.map &:to_sym).
     search q, fields: [:name], match: :word_middle, misspellings: {below: 5}
+  end
+
+  def self.distributor_close_to_retailer(retailer_id, page=1, per_page=10)
+    retailer = Retailer.retailer_by_id(retailer_id)
+    load_distributors(page, per_page)
+    .where(coordinates: {
+      id: Coordinate.within_radius(500, retailer.latitude, retailer.longitude).pluck(:id)
+    }).paginate(:page => page,:per_page => per_page)
   end
 end

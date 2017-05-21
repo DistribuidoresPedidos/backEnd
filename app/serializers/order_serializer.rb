@@ -14,7 +14,7 @@ class OrderSerializer < ActiveModel::Serializer
   	belongs_to :route
     has_many :orderProducts
   	has_many :comments
-  	has_many :offeredProducts, :through => :orderProducts , :source=> :offered_product
+  	has_many :offeredProducts, :through => :orderProducts, :source => :offered_product
 
     def render_id?
       render?(instance_options[:render_attribute].split(","),"order.id","id")
