@@ -6,4 +6,9 @@ class UserMailer < ApplicationMailer
     @url  = 'http://www.google.com.co/'
     mail(to: @user.email, subject: 'Welcome to My Awesome Site')
   end
+
+  def order_confirmation(user)
+    @user = user
+    mail(to: @user.email, subject: 'Tu pedido ha sido realizado')
+  end
 end
