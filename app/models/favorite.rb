@@ -13,7 +13,7 @@ class Favorite < ApplicationRecord
     })
   end
 
-  def self.is_repeated(retailer_id, distributor_id)
+  def self.is_favorite(retailer_id, distributor_id)
     load_favorites().where(favorites:{
       retailer_id: retailer_id,
       distributor_id: distributor_id

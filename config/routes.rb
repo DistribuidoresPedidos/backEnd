@@ -44,6 +44,7 @@ Rails.application.routes.draw do
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer'
           get 'categories_by_retailer', to: 'products#categories_by_retailer'
 
+          get 'is_favorite', to: 'favorites#is_favorite'
 
           #destroy
           match 'destroy', to: 'retailers#destroy', via: [:get , :delete]

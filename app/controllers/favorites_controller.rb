@@ -19,7 +19,7 @@ class FavoritesController < ApplicationController
   def create
     @favorite = Favorite.new(favorite_params)
     @favorite.retailer_id = params[:retailer_id]
-    if Favorite.is_repeated(params[:retailer_id], params[:distributor_id]) > 0
+    if Favorite.is_favorite(params[:retailer_id], params[:distributor_id]) > 0
       render json: {msg: "Favorite already exists"}, status: :unprocessable_entity
     else
       if @favorite.save
@@ -42,6 +42,14 @@ class FavoritesController < ApplicationController
   # DELETE /favorites/1
   def destroy
     @favorite.destroy
+  end
+
+  def is_favorite
+    if Favorite.is_favorite(params[:retailer_id], params[:distributor_id]) > 0
+      render json: {msg: "true"}
+    else
+      render json: {msg: "false"}
+    end
   end
 
   private
