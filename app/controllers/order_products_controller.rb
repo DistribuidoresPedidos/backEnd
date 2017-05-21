@@ -42,6 +42,10 @@ class OrderProductsController < ApplicationController
     @order_product.destroy
   end
 
+  def how_many_by_param
+    @order_products= OrderProduct.how_many_by_param(params[:offered_product_id], params[:param]);
+    render json: @order_products, root: "data",  each_serializer: OrderProductSerializer, render_attribute: params[:select_order_product] || "all"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order_product
