@@ -6,6 +6,8 @@ class Distributor < ActiveRecord::Base
   has_many :products, :through => :offeredProducts
   has_many :routes
   has_many :orders, :through => :routes
+  has_many :favorites
+  has_many :retailers, :through => :favorites
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable,  :validatable,

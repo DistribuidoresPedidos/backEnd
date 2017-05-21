@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330201457) do
+ActiveRecord::Schema.define(version: 20170520215336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 20170330201457) do
     t.index ["email"], name: "index_distributors_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_distributors_on_reset_password_token", unique: true, using: :btree
     t.index ["uid", "provider"], name: "index_distributors_on_uid_and_provider", unique: true, using: :btree
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "distributor_id"
+    t.integer  "retailer_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["distributor_id"], name: "index_favorites_on_distributor_id", using: :btree
+    t.index ["retailer_id"], name: "index_favorites_on_retailer_id", using: :btree
   end
 
   create_table "offered_products", force: :cascade do |t|
@@ -156,6 +165,8 @@ ActiveRecord::Schema.define(version: 20170330201457) do
 
   add_foreign_key "comments", "orders"
   add_foreign_key "coordinates", "routes"
+  add_foreign_key "favorites", "distributors"
+  add_foreign_key "favorites", "retailers"
   add_foreign_key "offered_products", "distributors"
   add_foreign_key "offered_products", "products"
   add_foreign_key "order_products", "offered_products"

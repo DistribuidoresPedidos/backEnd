@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :favorites
 #Retailer dont has routes for products , and retailer has routes for offered_products
 
   scope '/api' do
@@ -43,12 +44,14 @@ Rails.application.routes.draw do
           get 'order_product_by_retailer', to: 'order_products#order_product_by_retailer'
           get 'categories_by_retailer', to: 'products#categories_by_retailer'
 
+
           #destroy
           match 'destroy', to: 'retailers#destroy', via: [:get , :delete]
           resources :orders, except: [:create]
           resources :offered_products, except: [:create, :update, :destroy]
           resources :coordinates, only: [:index]
-        end
+          resources :favorites
+      end
 
 
       resources :routes do
