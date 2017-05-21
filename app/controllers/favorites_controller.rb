@@ -19,8 +19,10 @@ class FavoritesController < ApplicationController
   def create
     @favorite = Favorite.new(favorite_params)
     @favorite.retailer_id = params[:retailer_id]
-    if Favorite.is_favorite(params[:retailer_id], params[:distributor_id]) > 0
-      render json: {msg: "Favorite already exists"}, status: :ok
+    @favorite_existing = Favorite.find_favorite(params[:retailer_id], params[:distributor_id])
+    if @favorite_existing.count > 0
+      @favorite_existing.first.destroy
+      render json: {msg: "Favorite removed"}, status: :ok
     else
       if @favorite.save
         render json: @favorite, root: "data", each_serializer: FavoriteSerializer , render_attribute: params[:select_favorite] || "all", status: :created     

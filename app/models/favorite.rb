@@ -20,4 +20,11 @@ class Favorite < ApplicationRecord
     }).count
   end
 
+  def self.find_favorite( retailer_id, distributor_id )
+    load_favorites().where(favorites:{
+      retailer_id: retailer_id,
+      distributor_id: distributor_id
+    })
+  end
+
 end
