@@ -69,3 +69,6 @@ gem 'rack-throttle', '~> 0.5.0'
 
 #Super search like google
 gem 'searchkick'
+
+#https ssl
+gem 'rack-ssl', require: 'rack/ssl'
