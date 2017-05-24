@@ -2,6 +2,9 @@ require 'set'
 class Retailer < ActiveRecord::Base
   has_many :orders
   has_many :comments, :through => :orders
+  has_many :favorites
+  has_many :distributors, :through => :favorites
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,

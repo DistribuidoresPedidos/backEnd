@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /retailers/:id/orders
   def index
-    render json: @orders,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
+    render json: @orders, root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
   end
 
   # GET /retailers/:id/orders/1
@@ -77,6 +77,9 @@ class OrdersController < ApplicationController
         @order.totalPrice += @subtotal
       end
       @order.save
+      @retailer_id = @order.retailer_id
+      @retailer = Retailer.retailer_by_id(@retailer_id)
+      UserMailer.order_confirmation(@retailer).deliver
     render json: @order, status: :created,root: "data", each_serializer: OrderSerializer, render_attribute: params[:select_order] || "all"
     else
       render json: @order.errors, status: :unprocessable_entity
